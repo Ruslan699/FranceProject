@@ -1,0 +1,85 @@
+﻿@using AdminUI.Controllers
+@using AdminUI.Models
+@model SaleInseptionModel
+
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header header-elements-inline">
+        <div class="header-elements">
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+
+        @using (Html.BeginForm("UserRoleSave", "User", FormMethod.Post, new { @class = "form" }))
+
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Nom d'utilisateur</label>
+                        @Html.DropDownListFor(x => x.UserId, new SelectList(ViewBag.Users, "Id", "UserName"), "--", new
+                   {
+                       @class = "form-control",
+                       @onchange = "userPostalCodes(this.value)"
+                   })
+                        @Html.ValidationMessageFor(x => x.UserId)
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Rôle</label>
+                        <select name="RoleName" class="form-control">
+                            <option value="Admin"> Admin</option>
+                            <option value="Agent"> Agent</option>
+                            <option value="User">  User</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group" style="display:block">
+                        @Html.LabelFor(x => x.PostalCodes, StaticUI.PropertyPostalCodeLabel, new { @class = "control-label" })
+                        @Html.DropDownListFor(x => x.PostalCodeUids, Model.PostalCodes, new
+                     {
+                       @id = "regionSelector",
+                       multiple = "multiple",
+                       @class = "form-control selectpicker",
+                       @data_size = 7,
+                       @data_live_search = "true"
+                     })
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-start align-items-center">
+                <a href="@Url.Action(nameof(UserController.Index))" class="btn btn-light">Revenir</a>
+                <button type="submit" class="btn bg-blue ml-3">Confirmer <i class="icon-paperplane ml-2"></i></button>
+            </div>
+        }
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+
+        function userPostalCodes(ThisUserId) {
+            $.post('@Url.Action("UserPostalCodes", "User")', { userId: ThisUserId }, function (render) { $("#regionSelector").selectpicker('val', render["PostalCodeUids"]); })
+        }
+
+        $(document).ready(function () {
+            $('.selectpicker').selectpicker();
+        })
+    </script>
+}
+
+
+

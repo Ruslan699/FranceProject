@@ -1,0 +1,176 @@
+﻿@using DaddyAgencies.Common.Util.Resources
+@using AdminUI.Controllers
+@{
+    var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
+}
+<div class="sidebar sidebar-light sidebar-main sidebar-expand-md">
+
+    <div class="sidebar-mobile-toggler text-center">
+        <a href="#" class="sidebar-mobile-main-toggle">
+            <i class="icon-arrow-left8"></i>
+        </a>
+        <span class="font-weight-semibold">Navigation</span>
+        <a href="#" class="sidebar-mobile-expand">
+            <i class="icon-screen-full"></i>
+            <i class="icon-screen-normal"></i>
+        </a>
+    </div>
+    <div class="sidebar-content">
+
+        <div class="sidebar-user-material">
+            <div class="sidebar-user-material-body">
+                <div class="card-body text-center">
+                    <a href="#">
+                        <img src="~/Content/img/demo/users/picture2.jpg" class="img-fluid rounded-circle shadow-1 mb-3" width="80" height="80" alt="">
+                    </a>
+                    <h6 class="mb-0 text-white text-shadow-dark">@User.Identity.Name</h6>
+                    <span class="font-size-sm text-white text-shadow-dark"> France</span>
+                </div>
+
+                <div class="sidebar-user-material-footer">
+                    <a href="#user-nav" class="d-flex justify-content-between align-items-center text-shadow-dark dropdown-toggle legitRipple collapsed" data-toggle="collapse" aria-expanded="false"><span>Mon compte</span></a>
+                </div>
+            </div>
+
+            <div class="collapse" id="user-nav" style="">
+                <ul class="nav nav-sidebar">
+                    <li class="nav-item">
+                        <a href="@Url.Action("Logout","User")" class="nav-link legitRipple">
+                            <i class="icon-switch2"></i>
+                            <span>Connectez - Out</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="card card-sidebar-mobile">
+            <ul class="nav nav-sidebar" data-nav-type="accordion">
+
+                <li class="nav-item">
+                    <a href="@Url.Action(nameof(HomeController.Index), "Home")" class="nav-link legitRipple @(controller == "home" ? "active" : string.Empty)">
+                        <i class="icon-home4"></i>
+                        <span>
+                            Tableau de bord
+                        </span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="@Url.Action(nameof(AnnouncementController.Index), "Announcement")" class="nav-link legitRipple @(controller == "announcement" ? "active" : string.Empty)">
+                        <i class="icon-home4"></i>
+                        <span>
+                            Annonces
+                        </span>
+                    </a>
+                </li>
+
+                @if (User.IsInRole("Agent"))
+                {
+                    <li class="nav-item" style="display:none">
+                        <a href="@Url.Action(nameof(RegionController.Index), "Region")" class="nav-link legitRipple @(controller == "region" ? "active" : string.Empty)">
+                            <i class="icon-home4"></i>
+                            <span>
+                                @UI.Regions
+                            </span>
+                        </a>
+                    </li>
+                }
+
+                else
+                {
+                    <li class="nav-item">
+                        <a href="@Url.Action(nameof(RegionController.Index), "Region")" class="nav-link legitRipple @(controller == "region" ? "active" : string.Empty)">
+                            <i class="icon-home4"></i>
+                            <span>
+                                @UI.Regions
+                            </span>
+                        </a>
+                    </li>
+                }
+
+                @if (User.IsInRole("Agent"))
+                {
+
+                    <li class="nav-item" style="display:none;">
+                        <a href="@Url.Action(nameof(DepartamentController.Index), "Departament")" class="nav-link legitRipple @(controller == "departament" ? "active" : string.Empty)">
+                            <i class="icon-home4"></i>
+                            <span>
+                                Départements
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item" style="display:none;">
+                        <a href="@Url.Action(nameof(PostalCodeController.Index), "PostalCode")" class="nav-link legitRipple @(controller == "postalCode" ? "active" : string.Empty)">
+                            <i class="icon-home4"></i>
+                            <span>
+                                Code Postal
+                            </span>
+                        </a>
+                    </li>
+
+                }
+
+                else
+                {
+
+                    <li class="nav-item">
+                        <a href="@Url.Action(nameof(DepartamentController.Index), "Departament")" class="nav-link legitRipple @(controller == "departament" ? "active" : string.Empty)">
+                            <i class="icon-home4"></i>
+                            <span>
+                                Départements
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action(nameof(PostalCodeController.Index), "PostalCode")" class="nav-link legitRipple @(controller == "postalCode" ? "active" : string.Empty)">
+                            <i class="icon-home4"></i>
+                            <span>
+                                Code Postal
+                            </span>
+                        </a>
+                    </li>
+                }
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Inseption")" class="nav-link legitRipple">
+                        <i class="icon-home4"></i>
+                        <span>
+                            Demande de RV - Achat
+                        </span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="@Url.Action("Vendor", "Inseption")" class="nav-link legitRipple">
+                        <i class="icon-home4"></i>
+                        <span>
+                            Demande de RV - Vente
+                        </span>
+                    </a>
+                </li>
+
+                @if (User.IsInRole("Agent"))
+                {
+                    <li class="nav-item nav-item-submenu" style="display:none">
+                        <a href="#" class="nav-link legitRipple"><i class="icon-copy"></i> <span>@UI.Users</span></a>
+
+                        <ul class="nav nav-group-sub" data-submenu-title="Layouts">
+                            <li class="nav-item"><a href="@Url.Action(nameof(UserController.Index), "User")" class="nav-link legitRipple @(controller == "user" ? "active" : string.Empty)">@UI.Users</a></li>
+                        </ul>
+                    </li>
+                }
+
+                else
+                {
+                    <li class="nav-item nav-item-submenu">
+                        <a href="#" class="nav-link legitRipple"><i class="icon-copy"></i> <span>@UI.Users</span></a>
+
+                        <ul class="nav nav-group-sub" data-submenu-title="Layouts">
+                            <li class="nav-item"><a href="@Url.Action(nameof(UserController.Index), "User")" class="nav-link legitRipple @(controller == "user" ? "active" : string.Empty)">@UI.Users</a></li>
+                        </ul>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </div>
+</div>

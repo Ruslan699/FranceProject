@@ -1,0 +1,349 @@
+﻿@using AdminUI.Controllers
+@using AdminUI.Models
+@model AnnouncementModel
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Save", "Announcement", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form" }))
+
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(m => m.Uid)
+
+    <div class="card">
+        <h5 class="card-header">Annonce</h5>
+
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Titre</label>
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Adresse</label>
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>Départament</label>
+                        @Html.DropDownListFor(x => x.DepartamentUid, new SelectList(Model.Departaments, "Uid", "Name"), "--",
+                       new {
+                           @class = "form-control custom-select js-example-matcher-start",
+                           @onchange = "DepartamentChange(this.value)",
+                           @id = "departamentSelector"
+                       })
+                        @Html.ValidationMessageFor(m => m.DepartamentUid, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>Code Postal</label>
+                        @Html.DropDownListFor(c => c.PostalCode, Model.PostalCodes.Select(f => new SelectListItem
+                   {
+                       Value = f.Uid.ToString(),
+                       Text = f.Name,
+                   }), new {
+                       @class = "form-control js-example-matcher-start",
+                       @id = "postalCodeSelector"
+                   })
+
+                        @Html.ValidationMessageFor(m => m.PostalCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>Type</label>
+                        @Html.DropDownListFor(x => x.PropertyType, (IEnumerable<SelectListItem>)ViewBag.PropertyTypes, "--", new { @class = "form-control custom-select" })
+                        @Html.ValidationMessageFor(m => m.PropertyType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>Prix</label>
+                        @Html.TextBoxFor(m => m.SalePrice, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.SalePrice, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>Nombre de chambres</label>
+                        @Html.TextBoxFor(m => m.FloorsNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.FloorsNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>Nombre de pièces</label>
+                        @Html.TextBoxFor(m => m.RoomsCount, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.RoomsCount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>Surface</label>
+                        @Html.TextBoxFor(m => m.TotalSquare, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.TotalSquare, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <label>Parking</label>
+                        @*@Html.TextBoxFor(m => m.Parking, new { @class = "form-control" })*@
+                        @Html.DropDownListFor(x => x.Parking, new SelectList(new[] { "Oui", "Non" }), "--", new { @class = "form-control custom-select" })
+                        @Html.ValidationMessageFor(m => m.Parking, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <label>Status </label>
+                        @Html.DropDownListFor(x => x.Status, new SelectList(new[] { "New", "Old" }), "--", new { @class = "form-control custom-select" })
+                        @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <label>Classe  énergétique</label>
+                        @Html.DropDownListFor(x => x.EnergyClass, new SelectList(new[] { "A", "B", "C", "D", "E", "F", "G" }), "--", new { @class = "form-control custom-select" })
+                        @Html.ValidationMessageFor(m => m.EnergyClass, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <label>GES </label>
+                        @Html.DropDownListFor(x => x.Ges, new SelectList(new[] { "A", "B", "C", "D", "E", "F", "G" }), "--", new { @class = "form-control custom-select" })
+                        @Html.ValidationMessageFor(m => m.Ges, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label>Description</label>
+                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            @if (Model != null && Model.ImageIds != null)
+            {
+                <div class="form-group col-md-12 upload-btn-wrapper">
+                    <button class="btnImage">Télécharger les images</button>
+                    @Html.TextBoxFor(m => m.Files, new { type = "file", onchange = "preview_image();", id = "upload_file", name = "files", multiple = "multiple" })
+                    <div id="image_preview" class="row" style="margin-top:20px">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row" id="imageRemoveBtn">
+                            @foreach (var item in Model.ImageIds)
+                            {
+                                <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" style="overflow:hidden;margin-top:10px">
+                                    <div class="mt-1">
+                                        <a class="icon-cancel-circle2 circle btn" style="color: red"
+                                           onclick="remove('@Url.Action("RemovePicture", "Announcement")', '@item')"></a>
+                                    </div>
+                                    <img class="rowNumber" data-taskid="@item" src="@Url.Action("GetPropertyImage", "Announcement", new { id = item })" alt="Image" height="200" width="250" />
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="form-group col-md-12 upload-btn-wrapper">
+                    <button class="btnImage">Télécharger les images</button>
+                    @Html.TextBoxFor(m => m.Files, new { type = "file", onchange = "preview_image();", id = "upload_file", name = "files", multiple = "multiple" })
+                    <div id="image_preview" class="row" style="margin-top:20px">
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+
+    <div class="card">
+        <h5 class="card-header">Informations du propriétaire</h5>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Nom/Prénom</label>
+                        @Html.TextBoxFor(m => m.OwnerName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.OwnerName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        @Html.TextBoxFor(m => m.OwnerEmail, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.OwnerEmail, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Téléphone</label>
+                        @Html.TextBoxFor(m => m.OwnerPhone, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.OwnerPhone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Remarque</label>
+                        @Html.TextBoxFor(m => m.OwnerNote, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.OwnerNote, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-start align-items-center">
+                <a href="@Url.Action(nameof(AnnouncementController.Index))" class="btn btn-light">Revenir</a>
+                <button type="submit" class="btn bg-blue ml-3">Confirmer <i class="icon-paperplane ml-2"></i></button>
+            </div>
+
+        </div>
+    </div>
+}
+
+@section scripts
+            {
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/jquery.ui.touch-punch.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            $("#imageRemoveBtn").sortable();
+            $("#imageRemoveBtn").on("sortupdate", function (event, ui) {
+                //var data = $(this).sortable("serialize");
+                var itemIds = "";
+                $("#imageRemoveBtn").find(".rowNumber").each(function () {
+                    var itemId = $(this).attr("data-taskid");
+                    itemIds = itemIds + itemId + ",";
+                });
+                $.post('@Url.Action("SortableImage", "Announcement")', { itemIds: itemIds }, function (render) {
+
+                    alert(render);
+                })
+            })
+        });
+        $("#imageRemoveBtn").disableSelection();
+    </script>
+    <script src="~/App/select2.full.js"></script>
+    <script>
+        function matchCustom(params, data) {
+            // If there are no search terms, return all of the data
+            if ($.trim(params.term) === '') {
+                return data;
+            }
+
+            // Do not display the item if there is no 'text' property
+            if (typeof data.text === 'undefined') {
+                return null;
+            }
+
+            // `params.term` should be the term that is used for searching
+            // `data.text` is the text that is displayed for the data object
+            if (data.text.toUpperCase().indexOf(params.term.toUpperCase()) > -1) {
+                var modifiedData = $.extend({}, data, true);
+                modifiedData.text += ' ';
+
+                // You can return modified objects from here
+                // This includes matching the `children` how you want in nested data sets
+                return modifiedData;
+            }
+
+            // Return `null` if the term should not be displayed
+            return null;
+        }
+
+        $(".js-example-matcher-start").select2({
+            matcher: matchCustom,
+            placeholder: "Aucune sélection",
+            //allowClear: true
+            language: "fr"
+        });
+    </script>
+
+
+    <script>
+                function DepartamentChange(dpId) {
+                    $.ajax({
+                    type: 'POST',
+                    dataType: "json",
+                    url: '@Url.Action("PostalCodes", "Announcement")',
+                    data: { departamentId: dpId },
+                    success: function (response) {
+                        $('#postalCodeSelector').empty();
+                        $.each(response, function (i, item) {
+                            $('#postalCodeSelector').append(new Option(response[i].Text, response[i].Value));
+                        });
+                    },
+                    error: function () {
+                        alert('Error!');
+                    }
+                 });
+                }
+    </script>
+}
+
+<style>
+    .upload-btn-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+    }
+
+    .btnImage {
+        border: 1px solid #ccc;
+        background-color: #dddddd;
+        padding: 6px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer
+    }
+
+    .upload-btn-wrapper input[type=file] {
+        font-size: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    #imageRemoveBtn .mt-1 {
+        right: 20%;
+        position: absolute;
+        z-index: 99999;
+    }
+</style>

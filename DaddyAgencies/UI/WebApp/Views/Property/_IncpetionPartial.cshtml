@@ -1,0 +1,99 @@
+﻿@model WebApp.Models.InseptionModel
+
+@using (Html.BeginForm("SaveInseption", "Inseption"))
+{
+    @Html.HiddenFor(x => x.PropertyUid)
+    @Html.HiddenFor(x => x.RegionUid)
+    <input hidden id="PropertyLink" name="PropertyLink" value="@Context.Request.Url"/>
+    <div class="form-group">
+        <h5 class="card-title">@StaticUI.ProposalAddNewTitle</h5>
+        <p class="card-text">@StaticUI.ProposalAddNewText</p>
+        <br />
+        @*@if (User.Identity.IsAuthenticated)
+            {
+                <li style="list-style-type:none; display:none">@Html.ActionLink(StaticUI.LoginButton, "Login", "Account", null, new { @class = "btn btn-primary m-1", id = "loginLink" })</li>
+            }
+
+            else
+            {
+                <li style="list-style-type:none">@Html.ActionLink(StaticUI.LoginButton, "Login", "Account", null, new { @class = "btn btn-primary m-1", id = "loginLink" })</li>
+            }*@
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                @Html.LabelFor(x => x.Date, StaticUI.ProposalSelectDateLabel, new { @class = "col-form-label" })
+                @Html.TextBoxFor(x => x.Date, new { @id = "datepicker", autocomplete = "off",onchange = "CheckDateTypeIsValid(this)", @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Date, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                @Html.LabelFor(x => x.Time, StaticUI.ProposalSelectTimeLabel, new { @class = "col-form-label" })
+                @Html.DropDownListFor(x => x.Time, new List<SelectListItem>(), new { @id = "timeSelector", @class = "form-control selectpicker time-picker" })
+                @Html.ValidationMessageFor(m => m.Time, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(x => x.CustomerName, StaticUI.ProposalFullNameLabel, new { @class = "col-form-label" })
+                @Html.TextBoxFor(x => x.CustomerName, new { @id = "full_name", @class = "form-control", placeholder = StaticUI.FullnameFormPlaceholder })
+                @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @if (Model.CustomerEmail != null)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.LabelFor(x => x.CustomerEmail, StaticUI.ProposalEmailLabel, new { @class = "col-form-label" })
+                    @Html.TextBoxFor(x => x.CustomerEmail, new { @id = "e_mail", @class = "form-control", placeholder = StaticUI.ProposalEmailLabel, @readonly = true })
+                    @Html.ValidationMessageFor(m => m.CustomerEmail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        else
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.LabelFor(x => x.CustomerEmail, StaticUI.ProposalEmailLabel, new { @class = "col-form-label" })
+                    @Html.TextBoxFor(x => x.CustomerEmail, new { @id = "e_mail", @class = "form-control", placeholder = StaticUI.ProposalEmailLabel })
+                    @Html.ValidationMessageFor(m => m.CustomerEmail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(x => x.CustomerPhone, StaticUI.ProposalPhoneLabel, new { @class = "col-form-label" })
+                @Html.TextBoxFor(x => x.CustomerPhone, new { @id = "phone_number", @class = "form-control", placeholder = StaticUI.ProposalPhoneLabel })
+                @Html.ValidationMessageFor(m => m.CustomerPhone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div>
+            <hr />
+            <p class="" id="acceptText">
+                Je confirme avoir la capacité de financer ce bien à
+            </p>
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    @Html.RadioButtonFor(m => m.IsAccepted, true, new
+                    {
+                        @id = "isAccepted"
+                    }) Oui
+                </label>
+            </div>
+            <div class="form-check-inline">
+
+                <label class="form-check-label">
+                    @Html.RadioButtonFor(m => m.IsAccepted, true, new
+                    {
+                        @checked = "checked"
+                    }) Non
+                </label>
+            </div>
+        </div>
+        <div class="modal-footer" style="margin-top: 10px;">
+            <button type="submit" id="submitButton" class="btn btn-primary">@StaticUI.ProposalSaveButton</button>
+        </div>
+    </div>
+}
+
+

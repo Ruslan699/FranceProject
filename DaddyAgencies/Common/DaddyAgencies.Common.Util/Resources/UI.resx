@@ -1,0 +1,582 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddPropertyButton" xml:space="preserve">
+    <value>Confiez-nous votre bien immobilier !</value>
+  </data>
+  <data name="AddPropertyButtonMin" xml:space="preserve">
+    <value>Vendez votre bien</value>
+  </data>
+  <data name="AddressFormLabel" xml:space="preserve">
+    <value>Adresse:</value>
+  </data>
+  <data name="AdminPanel" xml:space="preserve">
+    <value>Panneau de gestion</value>
+  </data>
+  <data name="AdvancedSearchButton" xml:space="preserve">
+    <value>_More</value>
+  </data>
+  <data name="BuzzPage" xml:space="preserve">
+    <value>Papa Fait Le Buzz</value>
+  </data>
+  <data name="CannotBeEmpty" xml:space="preserve">
+    <value>Ne peux pas être vide</value>
+  </data>
+  <data name="CardEditLink" xml:space="preserve">
+    <value>modifier</value>
+  </data>
+  <data name="CardRefreshLink" xml:space="preserve">
+    <value>actualiser</value>
+  </data>
+  <data name="CardToPageLink" xml:space="preserve">
+    <value>cette page</value>
+  </data>
+  <data name="ConfirmationSectionTitle" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="ConfirmedAddressFormLabel" xml:space="preserve">
+    <value>Adresse confirmée:</value>
+  </data>
+  <data name="ConfirmedDateFormLabel" xml:space="preserve">
+    <value>Date confirmée:</value>
+  </data>
+  <data name="ConfirmPasswordFormLabel" xml:space="preserve">
+    <value>Mot de passe confirmée:</value>
+  </data>
+  <data name="ConfirmPasswordFormPlaceholder" xml:space="preserve">
+    <value>Le mot de passe ne correspond pas</value>
+  </data>
+  <data name="CreditPage" xml:space="preserve">
+    <value>48 Heures Credit</value>
+  </data>
+  <data name="CustomerSectionTitle" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="DateOfBirthFormLabel" xml:space="preserve">
+    <value>Date de naissance </value>
+  </data>
+  <data name="DescriptionFormLabel" xml:space="preserve">
+    <value>La description:</value>
+  </data>
+  <data name="EmailFormLabel" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="EmailFormPlaceholder" xml:space="preserve">
+    <value>example@mail.com</value>
+  </data>
+  <data name="FavoriteCardLink" xml:space="preserve">
+    <value>Favoris</value>
+  </data>
+  <data name="FavoriteCardsEmptyTextAfter" xml:space="preserve">
+    <value>, selectionez votre bien et clickez sur "etoile"</value>
+  </data>
+  <data name="FavoriteCardsEmptyTextBefore" xml:space="preserve">
+    <value>Ajoutez au favoris</value>
+  </data>
+  <data name="FavoriteCardsEmptyTitle" xml:space="preserve">
+    <value>No favorite links yet!</value>
+  </data>
+  <data name="FilterClearButton" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="FooterAbountCompany" xml:space="preserve">
+    <value>Agence immobilière Chez Papa la commission c’est 2000 balles Confiez-nous votre bien</value>
+  </data>
+  <data name="FooterAddress" xml:space="preserve">
+    <value>1 Avenue de Suède 06000 Nice</value>
+  </data>
+  <data name="FooterBenefits" xml:space="preserve">
+    <value>Benefits</value>
+  </data>
+  <data name="FooterBenefitsText" xml:space="preserve">
+    <value>Vous l'avez compris, nous faisons tout comme une agence immobilière traditionnelle, à un détail près, chez Papa, c'est 2000 balles.</value>
+  </data>
+  <data name="FooterCompanyName" xml:space="preserve">
+    <value>Les Agences De Dapa</value>
+  </data>
+  <data name="FooterContacts" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="FooterCopyright" xml:space="preserve">
+    <value>© 2019 Caspel. Tout droits réservés. Vérsion {0}</value>
+  </data>
+  <data name="FooterEmail" xml:space="preserve">
+    <value>Email: info@lesagencesdepapa.fr</value>
+  </data>
+  <data name="FooterPhone" xml:space="preserve">
+    <value>Apelle gratuit: --</value>
+  </data>
+  <data name="FullnameFormLabel" xml:space="preserve">
+    <value>Nom/Prénom:</value>
+  </data>
+  <data name="FullnameFormPlaceholder" xml:space="preserve">
+    <value>Nom/Prénom:</value>
+  </data>
+  <data name="GenderFormLabel" xml:space="preserve">
+    <value>Genre</value>
+  </data>
+  <data name="HomePage" xml:space="preserve">
+    <value>Les Agences De Papa</value>
+  </data>
+  <data name="Inseptions" xml:space="preserve">
+    <value>Inseptions</value>
+  </data>
+  <data name="IsApartmentCheckBox" xml:space="preserve">
+    <value>_Apartament</value>
+  </data>
+  <data name="IsAreaCheckBox" xml:space="preserve">
+    <value>_Area</value>
+  </data>
+  <data name="IsBuildingCheckBox" xml:space="preserve">
+    <value>_Bulding</value>
+  </data>
+  <data name="IsCottageCheckBox" xml:space="preserve">
+    <value>_Cottage</value>
+  </data>
+  <data name="IsOtherCheckBox" xml:space="preserve">
+    <value>_Other</value>
+  </data>
+  <data name="IsParkingCheckBox" xml:space="preserve">
+    <value>_Parking</value>
+  </data>
+  <data name="LoadingCardText" xml:space="preserve">
+    <value>Telechargement en cours... </value>
+  </data>
+  <data name="LoginButton" xml:space="preserve">
+    <value>Accès client</value>
+  </data>
+  <data name="LoginCardHeader" xml:space="preserve">
+    <value>Accès client</value>
+  </data>
+  <data name="LoginCardTitle" xml:space="preserve">
+    <value>Connectez-vous</value>
+  </data>
+  <data name="LogoutButton" xml:space="preserve">
+    <value>Deconnexion</value>
+  </data>
+  <data name="MapShowPropertyButton" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="MessageFormLabel" xml:space="preserve">
+    <value>Message:</value>
+  </data>
+  <data name="PageComeSoon" xml:space="preserve">
+    <value>à venir...</value>
+  </data>
+  <data name="PasswordFormLabel" xml:space="preserve">
+    <value>Mot de passe:</value>
+  </data>
+  <data name="PasswordFormPlaceholder" xml:space="preserve">
+    <value>6 caractère ou plus</value>
+  </data>
+  <data name="PhoneFormLabel" xml:space="preserve">
+    <value>Téléphone:</value>
+  </data>
+  <data name="PhoneFormPlaceholder" xml:space="preserve">
+    <value>+XX XXX XXX XX XX</value>
+  </data>
+  <data name="ProfileButton" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="ProfileCardHeader" xml:space="preserve">
+    <value>Bienvenue, {0}</value>
+  </data>
+  <data name="ProfileCardTitle" xml:space="preserve">
+    <value>Info profil</value>
+  </data>
+  <data name="PropertyAddressLabel" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="PropertyAddressPlaceHolder" xml:space="preserve">
+    <value>Chercher l'adresse</value>
+  </data>
+  <data name="PropertyCaptionLabel" xml:space="preserve">
+    <value>Legende</value>
+  </data>
+  <data name="PropertyCaptionPlaceHolder" xml:space="preserve">
+    <value>Description du bien</value>
+  </data>
+  <data name="PropertyDescriptionLabel" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="PropertyDescriptionPlaceHolder" xml:space="preserve">
+    <value>Description détaillée</value>
+  </data>
+  <data name="PropertyDetailAddDateLabel" xml:space="preserve">
+    <value>La date ajoutée</value>
+  </data>
+  <data name="PropertyDetailBuildingInfoLabel" xml:space="preserve">
+    <value>Info sur l'immeuble</value>
+  </data>
+  <data name="PropertyDetailCardFloorsLabel" xml:space="preserve">
+    <value>Nombre d'etages</value>
+  </data>
+  <data name="PropertyDetailCardHeader" xml:space="preserve">
+    <value>{0}, superficie totale {1} m²</value>
+  </data>
+  <data name="PropertyDetailCardSquareLabel" xml:space="preserve">
+    <value>La superficie totale</value>
+  </data>
+  <data name="PropertyDetailCardSquareText" xml:space="preserve">
+    <value>{0} m²</value>
+  </data>
+  <data name="PropertyDetailCardStateLabel" xml:space="preserve">
+    <value>L'état de l'immeuble</value>
+  </data>
+  <data name="PropertyDetailDescriptionLabel" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="PropertyDetailMapLabel" xml:space="preserve">
+    <value>Carte</value>
+  </data>
+  <data name="PropertyDetailSalePriceLabel" xml:space="preserve">
+    <value>Prix de vente: </value>
+  </data>
+  <data name="PropertyDetailTransactionTermsLabel" xml:space="preserve">
+    <value>Les conditions de transaction</value>
+  </data>
+  <data name="PropertyImagesLabel" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="PropertyLatitudeLabel" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="PropertyLongitudeLabel" xml:space="preserve">
+    <value>Longitude</value>
+  </data>
+  <data name="PropertyMapTitleLabel" xml:space="preserve">
+    <value>Placez marqueur sur la carte.</value>
+  </data>
+  <data name="PropertyNameFormLabel" xml:space="preserve">
+    <value>Caption:</value>
+  </data>
+  <data name="PropertyNotCloseCheck" xml:space="preserve">
+    <value>Déposer un autre</value>
+  </data>
+  <data name="PropertyPage" xml:space="preserve">
+    <value>Les Biens De Papa</value>
+  </data>
+  <data name="PropertyPostalCodeLabel" xml:space="preserve">
+    <value>Code postal du bien</value>
+  </data>
+  <data name="PropertyPostalCodePlaceHolder" xml:space="preserve">
+    <value>Code postale</value>
+  </data>
+  <data name="PropertyRegionUidLabel" xml:space="preserve">
+    <value>Région</value>
+  </data>
+  <data name="PropertyResetMarkerLabel" xml:space="preserve">
+    <value>Supprimer le marqueur</value>
+  </data>
+  <data name="PropertySalePriceLabel" xml:space="preserve">
+    <value>Prix de vente</value>
+  </data>
+  <data name="PropertySalePricePlaceHolder" xml:space="preserve">
+    <value>Prix de vente en EUR</value>
+  </data>
+  <data name="PropertySectionTitle" xml:space="preserve">
+    <value>Bien immobilier</value>
+  </data>
+  <data name="PropertySubmitButton" xml:space="preserve">
+    <value>Sauvgarder</value>
+  </data>
+  <data name="PropertyTotalSquareLabel" xml:space="preserve">
+    <value>Superficie totale</value>
+  </data>
+  <data name="PropertyTotalSquarePlaceHolder" xml:space="preserve">
+    <value>Superficie en m²</value>
+  </data>
+  <data name="ProposalAddNewText" xml:space="preserve">
+    <value>Déposez votre annonce, elle sera traitée par un de nos agents, dites-nous quand est-ce que vous préférez être recontacté</value>
+  </data>
+  <data name="ProposalAddNewTitle" xml:space="preserve">
+    <value>Programmez votre visite</value>
+  </data>
+  <data name="ProposalCardHeader" xml:space="preserve">
+    <value>Proposition</value>
+  </data>
+  <data name="ProposalCardsEmptyTextAfter" xml:space="preserve">
+    <value>, selectionez le bien et envoyez votre proposition</value>
+  </data>
+  <data name="ProposalCardsEmptyTextBefore" xml:space="preserve">
+    <value>To add proposal- visit </value>
+  </data>
+  <data name="ProposalCardsEmptyTitle" xml:space="preserve">
+    <value>No subscribed proposals yet!</value>
+  </data>
+  <data name="ProposalDeclineButton" xml:space="preserve">
+    <value>Refuser</value>
+  </data>
+  <data name="ProposalEmailLabel" xml:space="preserve">
+    <value>Votre mail</value>
+  </data>
+  <data name="ProposalFullNameLabel" xml:space="preserve">
+    <value>Nom/Prénom:</value>
+  </data>
+  <data name="ProposalPhoneLabel" xml:space="preserve">
+    <value>Téléphone:</value>
+  </data>
+  <data name="ProposalSaveButton" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="ProposalSelectDateLabel" xml:space="preserve">
+    <value>Sélectionnez la date de RDV</value>
+  </data>
+  <data name="ProposalSelectTimeLabel" xml:space="preserve">
+    <value>Heures approximatives</value>
+  </data>
+  <data name="ProposalShowPropertyButton" xml:space="preserve">
+    <value>Visualiser le bien</value>
+  </data>
+  <data name="RecruitementText" xml:space="preserve">
+    <value>Vous recherchez un emploi ou un complément d’activité ? rejoignez les Papas et les Mamans de votre région !</value>
+  </data>
+  <data name="Recruitment" xml:space="preserve">
+    <value>Recrutement</value>
+  </data>
+  <data name="RecruitmentDocument" xml:space="preserve">
+    <value>CV:</value>
+  </data>
+  <data name="RecruitmentPage" xml:space="preserve">
+    <value>Recrutement</value>
+  </data>
+  <data name="RecruitmentSaveButton" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="RecruitmentTitle" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="RegionLabel" xml:space="preserve">
+    <value>Région</value>
+  </data>
+  <data name="RegionNameFormLabel" xml:space="preserve">
+    <value>Prénom:</value>
+  </data>
+  <data name="Regions" xml:space="preserve">
+    <value>Régions</value>
+  </data>
+  <data name="RegisterButton" xml:space="preserve">
+    <value>S'inscrire</value>
+  </data>
+  <data name="RegisterCardHeader" xml:space="preserve">
+    <value>S'inscire</value>
+  </data>
+  <data name="RegisterCardTitle" xml:space="preserve">
+    <value>Connectez-vous ou inscrivez-vous</value>
+  </data>
+  <data name="RequestedDateFormLabel" xml:space="preserve">
+    <value>La date demandée</value>
+  </data>
+  <data name="SaleInseptionTitle" xml:space="preserve">
+    <value>Confiez-nous votre bien immobilier !</value>
+  </data>
+  <data name="SearchButton" xml:space="preserve">
+    <value>Recherche</value>
+  </data>
+  <data name="SearchByDepartamentLabel" xml:space="preserve">
+    <value>_Search by departament</value>
+  </data>
+  <data name="SearchByKeywordLabel" xml:space="preserve">
+    <value>Recherche par mot clé</value>
+  </data>
+  <data name="SearchByKeywordPlaceholder" xml:space="preserve">
+    <value>Entre les mot clés</value>
+  </data>
+  <data name="SearchByPostalCodeLabel" xml:space="preserve">
+    <value>Recherche par code postale</value>
+  </data>
+  <data name="SearchByPostalCodePlaceholder" xml:space="preserve">
+    <value>Entrer le code postale</value>
+  </data>
+  <data name="SearchByPriceMaxLabel" xml:space="preserve">
+    <value>Prix maximum</value>
+  </data>
+  <data name="SearchByPriceMaxPlaceholder" xml:space="preserve">
+    <value>$ Max</value>
+  </data>
+  <data name="SearchByPriceMinLabel" xml:space="preserve">
+    <value>Prix minimum</value>
+  </data>
+  <data name="SearchByPriceMinPlaceholder" xml:space="preserve">
+    <value>$ Min</value>
+  </data>
+  <data name="SearchByRegionLabel" xml:space="preserve">
+    <value>Recherche par région</value>
+  </data>
+  <data name="SearchByRoomMaxLabel" xml:space="preserve">
+    <value>_Room Max</value>
+  </data>
+  <data name="SearchByRoomMaxPlaceholder" xml:space="preserve">
+    <value>_Max count</value>
+  </data>
+  <data name="SearchByRoomMinLabel" xml:space="preserve">
+    <value>_Room Min</value>
+  </data>
+  <data name="SearchByRoomMinPlaceholder" xml:space="preserve">
+    <value>_Min count</value>
+  </data>
+  <data name="SearchBySquareMaxLabel" xml:space="preserve">
+    <value>_Square max</value>
+  </data>
+  <data name="SearchBySquareMaxPlaceholder" xml:space="preserve">
+    <value>_m² Max</value>
+  </data>
+  <data name="SearchBySquareMinLabel" xml:space="preserve">
+    <value>_Square min</value>
+  </data>
+  <data name="SearchBySquareMinPlaceholder" xml:space="preserve">
+    <value>_m² Min</value>
+  </data>
+  <data name="SearchResults" xml:space="preserve">
+    <value>Résultats de la recherche</value>
+  </data>
+  <data name="ServicePage" xml:space="preserve">
+    <value>Services &amp; Tarifs</value>
+  </data>
+  <data name="SkypeFormLabel" xml:space="preserve">
+    <value>Skype:</value>
+  </data>
+  <data name="StartTypingToSearch" xml:space="preserve">
+    <value>Recherche…</value>
+  </data>
+  <data name="StatusFormLabel" xml:space="preserve">
+    <value>Status:</value>
+  </data>
+  <data name="SuccessOperationCanLogin" xml:space="preserve">
+    <value>La demande a été acceptée. Vous pouvez maintenant vous connecter à votre compte pour voir le statut de votre demande.</value>
+  </data>
+  <data name="SuccessOperationCanRegister" xml:space="preserve">
+    <value>La demande a été acceptée. Maintenant, vous pouvez créer un compte pour voir le statut de la demande</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Utilisateurs</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Email invalide</value>
+  </data>
+  <data name="SignIN" xml:space="preserve">
+    <value>Se connecter</value>
+  </data>
+  <data name="loginPage" xml:space="preserve">
+    <value>Page De Connexion</value>
+  </data>
+  <data name="ProposalAddress" xml:space="preserve">
+    <value>Adresse, type du bien (surface, prix net vendeur souhaite etc.)</value>
+  </data>
+</root>

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A728078D-92BB-4CC0-BB65-B6F08DF2A909}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DaddyAgencies.Application</RootNamespace>
+    <AssemblyName>DaddyAgencies.Application</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=8.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.8.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="MediatR, Version=6.0.0.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MediatR.6.0.0\lib\net461\MediatR.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=4.4.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SimpleInjector.4.4.3\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationCompositionRoot.cs" />
+    <Compile Include="Features\Departament\DeleteDepartament.cs" />
+    <Compile Include="Features\Departament\FindDepartament.cs" />
+    <Compile Include="Features\Departament\GetDatas.cs" />
+    <Compile Include="Features\Departament\GetDepartaments.cs" />
+    <Compile Include="Features\Departament\SaveDepartament.cs" />
+    <Compile Include="Features\Documents\DeleteDocument.cs" />
+    <Compile Include="Features\Documents\FindDocument.cs" />
+    <Compile Include="Features\Documents\GetDocumentsByProperty.cs" />
+    <Compile Include="Features\Inseption\DeleteInseption.cs" />
+    <Compile Include="Features\Inseption\FindInseption.cs" />
+    <Compile Include="Features\Inseption\GetAgentsEmailsForProperty.cs" />
+    <Compile Include="Features\Inseption\GetAvailableInception.cs" />
+    <Compile Include="Features\Inseption\GetRegions.cs" />
+    <Compile Include="Features\Inseption\GetRequestedInseption.cs" />
+    <Compile Include="Features\Inseption\ProcessInseption.cs" />
+    <Compile Include="Features\Inseption\SaveInseption.cs" />
+    <Compile Include="Features\Inseption\SaveInseptionUser.cs" />
+    <Compile Include="Features\PhysicalPerson\FindPhysicalPersonByUser.cs" />
+    <Compile Include="Features\PhysicalPerson\SavePhysicalPersonDraft.cs" />
+    <Compile Include="Features\PostalCode\DeletePostalCode.cs" />
+    <Compile Include="Features\PostalCode\FindPostalCode.cs" />
+    <Compile Include="Features\PostalCode\GetPostalCodeMapDatas.cs" />
+    <Compile Include="Features\PostalCode\GetPostalCodes.cs" />
+    <Compile Include="Features\PostalCode\GetUserPostalCodes.cs" />
+    <Compile Include="Features\PostalCode\PostalCodeRegion.cs" />
+    <Compile Include="Features\PostalCode\SavePostalCode.cs" />
+    <Compile Include="Features\Property\DeleteProperty.cs" />
+    <Compile Include="Features\Property\UpdatePropertyDocumentRowNo.cs" />
+    <Compile Include="Features\Recruiment\SaveRecruitment.cs" />
+    <Compile Include="Features\Region\DeleteRegion.cs" />
+    <Compile Include="Features\Region\FindRegion.cs" />
+    <Compile Include="Features\Region\SaveRegion.cs" />
+    <Compile Include="Features\Role\GetRoles.cs" />
+    <Compile Include="Features\UserRole\GetUsersRoles.cs" />
+    <Compile Include="Features\UserRole\SaveUserRole.cs" />
+    <Compile Include="Features\User\DeleteUserReferences.cs" />
+    <Compile Include="Features\User\FindUser.cs" />
+    <Compile Include="Features\User\GetUsers.cs" />
+    <Compile Include="Features\User\SaveUser.cs" />
+    <Compile Include="Features\User\SaveUserPostalCodes.cs" />
+    <Compile Include="Models\Departament.cs" />
+    <Compile Include="Models\DucumentBase.cs" />
+    <Compile Include="Features\Property\FindProperty.cs" />
+    <Compile Include="Features\Property\GetProperties.cs" />
+    <Compile Include="Features\Property\GetPropertiesByFilter.cs" />
+    <Compile Include="Features\Property\SaveProperty.cs" />
+    <Compile Include="Features\Region\GetRegions.cs" />
+    <Compile Include="Helpers\MediatorExtensions.cs" />
+    <Compile Include="Models\Enums\PropertyType.cs" />
+    <Compile Include="Models\Enums\UserRoles.cs" />
+    <Compile Include="Models\Inseption.cs" />
+    <Compile Include="Models\MainDepartment.cs" />
+    <Compile Include="Models\PhysicalPerson.cs" />
+    <Compile Include="Models\PostalCode.cs" />
+    <Compile Include="Models\PropertyAgentInfo.cs" />
+    <Compile Include="Models\PropertyPreview.cs" />
+    <Compile Include="Models\PropertyFilter.cs" />
+    <Compile Include="Models\Recruitment.cs" />
+    <Compile Include="Models\Region.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserRole.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\DaddyAgencies.Common.Application\DaddyAgencies.Common.Application.csproj">
+      <Project>{4DB74BAF-1315-4C27-A2CF-8420A011C1F6}</Project>
+      <Name>DaddyAgencies.Common.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\DaddyAgencies.Common.Contracts\DaddyAgencies.Common.Contracts.csproj">
+      <Project>{06C0C529-481E-448B-8A41-7CF9E316DEFC}</Project>
+      <Name>DaddyAgencies.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\DaddyAgencies.Common.MediatR\DaddyAgencies.Common.MediatR.csproj">
+      <Project>{EC653BEE-C038-4101-91BE-0216B4D86DBE}</Project>
+      <Name>DaddyAgencies.Common.MediatR</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

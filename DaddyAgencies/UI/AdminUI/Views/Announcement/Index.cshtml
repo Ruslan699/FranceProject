@@ -1,0 +1,19 @@
+﻿@using DaddyAgencies.Common.Util.Resources
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="card">
+    <div class="card-header header-elements-inline">
+        <div class="header-elements">
+            <a href="@Url.Action("Create","Announcement")" style="margin-right:3px" type="button" id="btnAdd" class="btn btn-success">
+                <i class="fa fa-plus"></i> Créer
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        @Html.Partial("_GridPartial")
+        <div id="loader">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+﻿@section styles{
+    <link rel="stylesheet" type="text/css" href="~/App/SliderEngine/style.css" />
+}
+<link href="https://fonts.googleapis.com/css?family=Mountains+of+Christmas&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
+
+<div id="wrapper">
+    <div class="background" style="height: 100%; width: 100%;">
+        @* <img src="~/images/bgmain-min.png" style="height: 100%; width: 100%" />*@
+    </div>
+    <div class="content">
+        <div class="col-12" style="padding-top: 60px;">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-4 text-center">
+                    <img style="width: 75%;" src="~/images/logo.png" />
+                    <h5 class="text-white text-md-center mt-3" id="smaller" style="font-weight: bold;">
+                        AGENCE IMMOBILIÈRE
+                        <br />
+                    </h5>
+                    <h5 class="text-white text-md-center mt-3" style="font-weight: bold;">
+                        CHEZ PAPA LA COMMISSION <br /> C’EST <span style="color: white; font-size:30px">2000</span> BALLES*<br />
+                        <br />
+
+                        <a class="btn btn-success m-1 m" href="/Inseption/SaveInseption"> <b style="font-size:18px;">CONFIEZ-NOUS VOTRE BIEN</b></a>
+                    </h5>
+
+                    <p class="text-white text-md-center">
+                        *2000€ TTC à la vente du bien
+                    </p>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-8">
+                    <div id="wowslider-container1">
+                        <div class="ws_images">
+                            <ul>
+                                <li><img style="background: transparent; background-color: transparent;" src="~/images/etapes_min/00-min.png" alt=" " title=" " id="wows1_0" /></li>
+                                <li><img style="background: transparent; background-color: transparent;" src="~/images/etapes_min/01-min.png" alt="etape2" title="Étape 1" id="wows1_1" /></li>
+                                <li><img style="background: transparent; background-color: transparent;" src="~/images/etapes_min/02-min.png" alt="etape3" title="Étape 2" id="wows1_2" /></li>
+                                <li><img style="background: transparent; background-color: transparent;" src="~/images/etapes_min/03-min.png" alt="etape4" title="Étape 3" id="wows1_3" /></li>
+                                <li><img style="background: transparent; background-color: transparent;" src="~/images/etapes_min/04-min.png" alt="etape5" title="Étape 4" id="wows1_4" /></li>
+                                <li><img style="background: transparent; background-color: transparent;" src="~/images/etapes_min/05-min.png" alt="etape6" title="Étape 5" id="wows1_5" /></li>
+                            </ul>
+                        </div>
+                        <div class="ws_bullets">
+                            <div>
+                                <a href="#" title="etape1"><span>1</span></a>
+                                <a href="#" title="etape2"><span>2</span></a>
+                                <a href="#" title="etape3"><span>3</span></a>
+                                <a href="#" title="etape4"><span>4</span></a>
+                                <a href="#" title="etape5"><span>5</span></a>
+                                <a href="#" title="etape6"><span>6</span></a>
+                            </div>
+                        </div>
+                        <div class="ws_shadow"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #smaller {
+        font-size: 15px;
+    }
+
+    .ws_images span {
+        font-family: 'Courgette', cursive;
+    }
+
+    @@media (min-width: 300px) and (max-width: 768px) {
+         #wowslider-container1 .ws-title {
+        
+            top: 94%;
+        }
+    }
+
+</style>
+
+
+@section scripts{
+    <script type="text/javascript" src="~/App/SliderEngine/wowslider.js"></script>
+    <script type="text/javascript" src="~/App/SliderEngine/script.js"></script>
+
+}

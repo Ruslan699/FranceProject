@@ -1,0 +1,226 @@
+﻿@using System.Reflection
+@using Microsoft.AspNet.Identity
+@using WebApp.Controllers
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@StaticUI.HomePage</title>
+    <link rel="icon" href="~/images/logosmall.png">
+    <link rel="stylesheet" type="text/css" href="~/App/style.css">
+    <link rel="stylesheet" type="text/css" href="~/App/responsiveStyle.css">
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/bootstrap-select.css" />
+    <link href="~/Content/bootstrap-datepicker3.css" rel="stylesheet" />
+    <link href="~/css/bootstrap-slider.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css">
+    <link href="~/Content/alertifyjs/alertify.min.css" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/themes/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/chosen.min.css" rel="stylesheet" />
+    <meta property="og:url" content="@ViewBag.Url" />
+    <meta property="og:type" content="@ViewBag.Type" />
+    <meta property="og:title" content="@ViewBag.Title" />
+    <meta property="og:description" content="@ViewBag.Description" />
+    @if (ViewBag.Images != null)
+    {
+        foreach (var item in ViewBag.Images)
+        {
+            <meta property="og:image" content="@item" />
+        }
+    }
+    @RenderSection("styles", false)
+</head>
+
+<body class="bg-main">
+    <!--header-part-->
+    <div id="headerbanner" class="header_banner clearfix">
+        <header>
+            <!--navbar-->
+            <nav class="navbar navbar-expand-sm">
+                <div class="container-fluid navbar-containernt">
+                    <!-- Brand -->
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")"> <img src="~/images/logosmall.png" alt="logo_img" width="80" class="img-fluid"> </a>
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")"> <img src="~/images/logo_menu.png" alt="logo_img" width="155" class="img-fluid"> </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon fa fa-bars"> </span>
+                    </button>
+                    <!-- Links -->
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav nav">
+                            <li id="servicesPage" class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Services")"> @StaticUI.ServicePage </a></li>
+                            <li id="propertyPage" class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Property")"> @StaticUI.PropertyPage </a></li>
+                            @*<li id="creditPage" class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Credit")"> @StaticUI.CreditPage </a></li>*@
+                            <li id="buzzPage" class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Buzz")"> @StaticUI.BuzzPage </a></li>
+                            <li id="recruitmentPage" class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Recruitment")"> @StaticUI.RecruitmentPage </a></li>
+                        </ul>
+                        <ul class="navbar-nav ml-auto btn-group navbar-nav">
+                            <li> @Html.ActionLink(@StaticUI.PropertyPage, "Index", "Property", null, new { @class = "btn btn-primary m-1 m" })</li>
+                            <li> @Html.ActionLink(StaticUI.AddPropertyButtonMin, "SaveInseption", "Inseption", null, new { @class = "btn btn-success m-1 m" })</li>
+                            @*@if (Request.IsAuthenticated)
+                                {
+                                    <li>
+                                        <a class="btn btn-primary m-1" href="@Url.Action("Index", "Profile")"><i class="fa fa-user"></i></a>
+                                    </li>
+                                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <li><a class="btn btn-danger m-1" href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i></a></li>
+                                    }
+                                }
+                                else
+                                {
+                                    @*<li>@Html.ActionLink(StaticUI.RegisterButton, "Register", "Account", null, new { @class = "btn btn-success m-1", id = "registerLink" })</li>*@
+                            @*<li>@Html.ActionLink(StaticUI.LoginButton, "Login", "Account", null, new { @class = "btn btn-primary m-1", id = "loginLink" })</li>*@
+                            @*}*@
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    </div>
+    <hr style="margin: 0 auto; background-color: lightskyblue; width: 80%" />
+    <div class="m-3">
+        @RenderBody()
+    </div>
+    <footer>
+        <div class="footer_inner page-footer m-0">
+            <div class="container-fluid">
+                <div>
+                    <div class="row">
+                        <div class="col-md-4" style="margin-bottom:15px">
+                            <h5>@StaticUI.FooterCompanyName</h5>
+                            <p>
+                                Agence immobilière <br /> Chez Papa la commission <br /> c’est 2000 balles <br />
+                                <br />
+                                <a class="btn btn-success m-1 m" href="/Inseption/SaveInseption">
+                                    <b style="font-size:12px; color:white;">Confiez-Nous Votre Bien</b>
+                                </a>
+                            </p>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="row text-left">
+                                <div class="col-md-6">
+                                    <ul style="padding-left: 0px;margin-bottom:0px">
+                                        <li><a href="@Url.Action("Index", "Services")"> @StaticUI.ServicePage</a></li>
+                                        <li><a href="@Url.Action("Index", "Property")"> @StaticUI.PropertyPage </a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul style="padding-left: 0px;">
+                                        @*<li><a href="@Url.Action("Index", "Credit")"> @StaticUI.CreditPage </a></li>*@
+                                        <li><a href="@Url.Action("Index", "Buzz")"> @StaticUI.BuzzPage </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 widgets-col">
+                            <h5>@StaticUI.FooterContacts</h5>
+                            <p>
+                                Lesagencedepapa.fr<br />
+                                <i class="fa fa-map-marker"></i>
+                                4 rue Grimaldi<br />
+                                06000 Nice<br />
+                                France<br />
+
+                                Standard : <a href="tel:00330980083232">+33 (0)9 80 08 32 32</a>
+
+                            </p>
+                            <p>
+                                <i class="fa fa-envelope"></i>
+
+                                <span> <a href="mailto:info@lesagencesdepapa.fr" target="_top">@StaticUI.FooterEmail</a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+
+                </div>
+                <div class="coppy-right text-center col-md-5">
+                    <p>© @DateTime.Now.Year LesAgencesDePapa.Fr - <a href="@Url.Action("Index", "Mentionslegales")">Mentions légales / nos honoraires </a> - Données personnelles – <a target="_blank" href="http://www.caspel.az/">Design by CASPEL</a></p>
+                    @*<p>@String.Format(StaticUI.FooterCopyright, @Assembly.GetAssembly(typeof(HomeController)).GetName().Version)</p>*@
+                </div>
+                <div class="col-md-3 text-center">
+                    <ul class="team_social">
+                        <li>
+                            <a target="_blank" href="https://www.facebook.com/lesagencesdepapa/"> <i class="fa fa-facebook"></i> </a>
+                        </li>
+                        <li>
+                            <a href="#"> <i class="fa fa-twitter"></i> </a>
+                        </li>
+                        <li>
+                            <a href="#"> <i class="fa fa-instagram"></i> </a>
+                        </li>
+                        <li>
+                            <a href="#"> <i class="fa fa-google"></i> </a>
+                        </li>
+                        <li>
+                            <a href="#"> <i class="fa fa-youtube"></i> </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/Scripts/alertify.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/alertify.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/umd/popper.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/locales/bootstrap-datepicker.fr.min.js"></script>
+    <script src="~/Scripts/bootstrap-slider.min.js"></script>
+    <script src="~/Scripts/bootstrap-select.min.js"></script>
+    <script src="~/Scripts/i18n/defaults-fr_FR.min.js"></script>
+    <script type="text/javascript" src="~/App/site.js"></script>
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
+
+    @RenderSection("scripts", false)
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143754385-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-143754385-1');
+    </script>
+
+    <script>
+        var currentPage = location.pathname;
+
+        function checkMessages() {
+            var message = @Html.Raw(Json.Encode(ViewData["ErrorMessages"]));
+            if (message) {
+            }
+
+            alertify.set('notifier', 'position', 'bottom-right');
+            alertify.error('Current position : ' + alertify.get('notifier', 'position'));
+            alertify.success('Current position : ' + alertify.get('notifier', 'position'));
+        }
+
+
+
+        $(document).ready(function () {
+            validator();
+            $(".dropdown-toggle").each(function (i, e) {
+                if (e.id != 'dropdownMenuLink') {
+                    $(e).addClass("form-control");
+                    $(e).addClass("btn-white");
+                }
+            });
+            if (currentPage == '' || currentPage == '/Home' || currentPage == '/Home/Index' ||
+                currentPage == '/' || currentPage == '/Home/' || currentPage == '/Home/Index/') {
+                $('.bg-main').addClass('bg-main-active');
+            }
+        });
+    </script>
+    @*if (currentPage === '' || currentPage === '/Home' || currentPage === '/Home/Index' ||
+    currentPage === '/' || currentPage === '/Home/' || currentPage === '/Home/Index/' ||
+    currentPage === '/develop' || currentPage === '/develop/Home' || currentPage === '/develop/Home/Index' ||
+    currentPage === '/develop/' || currentPage === '/develop/Home/' || currentPage === '/develop/Home/Index/') {
+    $('.bg-main').addClass('bg-main-active');
+    }*@
+</body>

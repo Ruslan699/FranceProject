@@ -1,0 +1,126 @@
+﻿@model WebApp.Models.SaleInseptionModel
+
+<div class="container-fluid">
+    <div class="container">
+        <div class="card bg-light">
+            <div class="card-header">
+                <h3>@StaticUI.SaleInseptionTitle</h3>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("SaveInseption", "Inseption"))
+                {
+                    <p class="card-text">@StaticUI.ProposalAddNewText</p>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" style="margin-top:20px">
+                                @Html.LabelFor(x => x.PostalCodes, StaticUI.PropertyPostalCodeLabel, new { @class = "control-label" })
+                                @Html.DropDownListFor(x => x.PostalCodeUid, Model.PostalCodes, new
+                                {
+                                    @id = "regionSelector",
+                                    @class = "form-control selectpicker time",
+                                    @data_size = 7,
+                                    @data_actions_box = "true",
+                                    @data_live_search = "true",
+                                })
+                                @Html.ValidationMessageFor(m => m.PostalCodes, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.Date, StaticUI.ProposalSelectDateLabel, new { @class = "form-label" })
+                                @Html.TextBoxFor(x => x.Date, new { @id = "datepicker", autocomplete = "off", onchange = "CheckDateTypeIsValid(this)", @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Date, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group" style="margin-top:20px">
+                                @Html.LabelFor(x => x.Time, StaticUI.ProposalSelectTimeLabel, new { @class = "form-label" })
+                                @Html.DropDownListFor(x => x.Time, new List<SelectListItem>(), new { @id = "timeSelector",
+                               @class = "form-control selectpicker time-picker",
+
+                           })
+                                @Html.ValidationMessageFor(m => m.Time, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(x => x.CustomerName, StaticUI.ProposalFullNameLabel, new { @class = "form-label" })
+                            @Html.TextBoxFor(x => x.CustomerName, new { @id = "full_name", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.CustomerEmail, StaticUI.ProposalEmailLabel, new { @class = "form-label" })
+                                @Html.TextBoxFor(x => x.CustomerEmail, new { @id = "e_mail", @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.CustomerEmail, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.CustomerPhone, StaticUI.ProposalPhoneLabel, new { @class = "form-label" })
+                                @Html.TextBoxFor(x => x.CustomerPhone, new { @id = "phone_number", @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.CustomerPhone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(x => x.Description, StaticUI.ProposalAddress, new { @class = "form-label" })
+                            @Html.TextAreaFor(x => x.Description, new { @id = "decription", @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="margin-top: 10px;">
+                        <button type="submit" class="btn btn-primary">@StaticUI.ProposalSaveButton</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        var hoursList = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+
+        $(document).ready(function () {
+            $('#datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                language: 'fr',
+                autoclose: true,
+                startDate: new Date(),
+                daysOfWeekDisabled: [0]
+            });
+            $('#datepicker').datepicker('update', new Date());
+            setAviableInseptionHours();
+            $('button[data-id="regionSelector"]').each(function (i, e) {
+                $(e).addClass("form-control");
+                $(e).addClass("btn-white");
+            });
+        });
+
+        function setAviableInseptionHours() {
+            var options = [];
+            $.each(hoursList, function (i, e) {
+                var option;
+                if (e.toString().length == 1)
+                    option = "<option value='" + e + "'>0" + e + ":00</option>";
+                else
+                    option = "<option value='" + e + "'>" + e + ":00</option>";
+                options.push(option);
+            });
+
+            $($('.selectpicker')[1]).html(options);
+            $($('.selectpicker')[1]).selectpicker('refresh');
+        }
+    </script>
+}

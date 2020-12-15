@@ -1,0 +1,78 @@
+﻿@using System.Activities.Expressions
+@using DaddyAgencies.Application.Models
+@model ICollection<DaddyAgencies.Application.Models.Inseption>
+
+<div id="inseptionsDiv" class="col-md-12">
+    @if (Model.Any())
+    {
+        foreach (var inseption in Model)
+        {
+    <div class="shadow p-3 mb-4 bg-white rounded">
+        <div class="row">
+            <div class="col-md-3">
+                <p class="font-weight-bold">@StaticUI.ConfirmationSectionTitle</p>
+            </div>
+            <div class="col-md-9">
+                <p><span class="font-italic">@StaticUI.RequestedDateFormLabel</span> @inseption.RequestedDate</p>
+                <p><span class="font-italic">@StaticUI.ConfirmedDateFormLabel</span> @inseption.ConfirmedDate</p>
+                <p><span class="font-italic">@StaticUI.StatusFormLabel</span> @inseption.Status</p>
+                <p><span class="font-italic">@StaticUI.ConfirmedAddressFormLabel</span> @inseption.ConfirmedAddress</p>
+            </div>
+        </div>
+        <hr />
+        @if (!string.IsNullOrWhiteSpace(@inseption.PropertyName))
+        {
+            <div class="row">
+                <div class="col-md-3">
+                    <p class="font-weight-bold">@StaticUI.PropertySectionTitle</p>
+                </div>
+                <div class="col-md-9">
+                    <p><span class="font-italic">@StaticUI.PropertyNameFormLabel</span>@inseption.PropertyName</p>
+                    <p><span class="font-italic">@StaticUI.AddressFormLabel</span>@inseption.PropertyAddress</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-md-3">
+                    <p class="font-weight-bold">@StaticUI.RegionLabel</p>
+                </div>
+                <div class="col-md-9">
+                    <p><span class="font-italic">@StaticUI.RegionNameFormLabel</span>@inseption.RegionName</p>
+                    <p><span class="font-italic">@StaticUI.DescriptionFormLabel </span>@inseption.Description</p>
+                </div>
+            </div>
+        }
+        <hr />
+        <div class="row">
+            <div class="col-md-3">
+                <p class="font-weight-bold">@StaticUI.CustomerSectionTitle</p>
+            </div>
+            <div class="col-md-9">
+                <p><span class="font-italic">@StaticUI.FullnameFormLabel </span>@inseption.CustomerFullName</p>
+                <p><span class="font-italic">@StaticUI.PhoneFormLabel </span>@inseption.CustomerPhone</p>
+                <p><span class="font-italic">@StaticUI.EmailFormLabel </span>@inseption.CustomerEmail</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mt-3">
+                <button class="btn btn-danger mr-3 float-md-right">@StaticUI.ProposalDeclineButton</button>
+
+                @if (!string.IsNullOrWhiteSpace(@inseption.PropertyName))
+                {
+                    @Html.ActionLink(StaticUI.ProposalShowPropertyButton, "GetDetails", "Property", new { @uid = inseption.PropertyUid }, new { @class = "btn btn-info mr-3 float-md-right" })
+                }
+            </div>
+        </div>
+    </div>
+        }
+    }
+    else
+    {
+        <div id="noInseptionsDiv" class="hide">
+            <p>@StaticUI.ProposalCardsEmptyTitle</p>
+            <p>@StaticUI.ProposalCardsEmptyTextBefore @Html.ActionLink(StaticUI.CardToPageLink, "Index", "Property") @StaticUI.ProposalCardsEmptyTextAfter</p>
+        </div>
+    }
+</div>

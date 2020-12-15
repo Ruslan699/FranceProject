@@ -1,0 +1,50 @@
+﻿@using AdminUI.Controllers
+@using DaddyAgencies.Common.EntityFramework.Identity
+
+@(Html.DevExtreme().DataGrid<DaddyAgencies.Application.Models.User>()
+        .ID("usersGridContainer")
+        .DataSource(d => d.Mvc().Controller("Data").LoadAction(nameof(DataController.GetUsersAsync)).Key("Id"))
+        .RemoteOperations(false)
+        .AllowColumnReordering(true)
+        .RowAlternationEnabled(true)
+        .FilterRow(filterRow => filterRow.Visible(true).ApplyFilter(GridApplyFilterMode.Auto))
+        .ShowBorders(true)
+        .Paging(p => p.PageSize(10))
+        .Pager(p => p.ShowPageSizeSelector(true).AllowedPageSizes(new int[] { 10, 20, 50 }))
+        //.SearchPanel(s => s.Visible(true).HighlightCaseSensitive(true))
+        .Scrolling(scrolling => scrolling.Mode(GridScrollingMode.Standard))
+        //.Export(e => e.Enabled(true).FileName($"UsersGrid-{DateTime.Now.ToString()}"))
+        .ColumnMinWidth(120)
+        //.HeaderFilter(headerFilter => headerFilter.Visible(true))
+        .Columns(columns =>
+        {
+            columns.AddFor(m => m.UserName)
+        .Caption("Nom d'utilisateur");
+            columns.AddFor(m => m.PhoneNumber)
+        .Caption("Numéro de téléphone");
+            columns.AddFor(m => m.Email)
+        .Caption("Email");
+
+
+
+
+            columns.AddFor(m => m.Id)
+        .Caption("Opérations")
+        .Width(150)
+        .AllowFiltering(false)
+        .AllowSorting(false)
+        .CellTemplate(@<text>
+
+            <button class="btn btn-sm btn-primary"
+                    onclick="HrefMe('@Url.Action("Edit", "User")', '<%=value%>')">
+                <i class="icon-pencil4"></i>
+            </button>
+            <button class="btn btn-sm btn-danger"
+                    onclick="remove('@Url.Action("Delete", "User")', '<%=value%>',this)">
+                <i class="icon-trash"></i>
+            </button>
+
+        </text>);
+
+        })
+)

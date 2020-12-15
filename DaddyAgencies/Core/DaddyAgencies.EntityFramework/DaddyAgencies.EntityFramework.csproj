@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F0D30E83-1D00-43B8-83D9-82E142A234E9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DaddyAgencies.EntityFramework</RootNamespace>
+    <AssemblyName>DaddyAgencies.EntityFramework</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=8.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.8.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.EF6, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.EF6.2.0.0\lib\net461\AutoMapper.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="DelegateDecompiler, Version=1.0.0.0, Culture=neutral, PublicKeyToken=93b26a10a04705bd, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DelegateDecompiler.0.25.0\lib\net45\DelegateDecompiler.dll</HintPath>
+    </Reference>
+    <Reference Include="DelegateDecompiler.EntityFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=93b26a10a04705bd, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\DelegateDecompiler.EntityFramework.0.25.0\lib\net45\DelegateDecompiler.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MediatR, Version=6.0.0.0, Culture=neutral, PublicKeyToken=bb9a41a5e8aaa7e2, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MediatR.6.0.0\lib\net461\MediatR.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Reflection, Version=1.1.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Mono.Reflection.Core.1.1.1\lib\net45\Mono.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Features\Departament\DepartamentCommandHandler.cs" />
+    <Compile Include="Features\Documents\DocumentCommandHandler.cs" />
+    <Compile Include="Features\Inseption\InceptionCommandHandler.cs" />
+    <Compile Include="Features\MappingProfile.cs" />
+    <Compile Include="Features\PhysicalPerson\PhysicalPersonCommandHandler.cs" />
+    <Compile Include="Features\PostalCode\PostalCommandHandler.cs" />
+    <Compile Include="Features\Property\PropertyCommandHandler.cs" />
+    <Compile Include="Features\Recruitment\RecruitmentCommandHandler.cs" />
+    <Compile Include="Features\Region\RegionCommandHandler.cs" />
+    <Compile Include="Features\RequestHandler.cs" />
+    <Compile Include="Features\Roles\RoleCommandHandler.cs" />
+    <Compile Include="Features\UserRole\UserRoleCommandHandler.cs" />
+    <Compile Include="Features\Users\UserCommandHandler.cs" />
+    <Compile Include="Migrations\201901241150490_region_property_init.cs" />
+    <Compile Include="Migrations\201901241150490_region_property_init.Designer.cs">
+      <DependentUpon>201901241150490_region_property_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901261511220_documents.cs" />
+    <Compile Include="Migrations\201901261511220_documents.Designer.cs">
+      <DependentUpon>201901261511220_documents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901262143551_inception.cs" />
+    <Compile Include="Migrations\201901262143551_inception.Designer.cs">
+      <DependentUpon>201901262143551_inception.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901271738065_physical-person.cs" />
+    <Compile Include="Migrations\201901271738065_physical-person.Designer.cs">
+      <DependentUpon>201901271738065_physical-person.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901272120475_inseption-edited.cs" />
+    <Compile Include="Migrations\201901272120475_inseption-edited.Designer.cs">
+      <DependentUpon>201901272120475_inseption-edited.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901280512152_latlong_scale.cs" />
+    <Compile Include="Migrations\201901280512152_latlong_scale.Designer.cs">
+      <DependentUpon>201901280512152_latlong_scale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902051201598_region_table.cs" />
+    <Compile Include="Migrations\201902051201598_region_table.Designer.cs">
+      <DependentUpon>201902051201598_region_table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902051940281_remove_reuqire_inseption_user.cs" />
+    <Compile Include="Migrations\201902051940281_remove_reuqire_inseption_user.Designer.cs">
+      <DependentUpon>201902051940281_remove_reuqire_inseption_user.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902052324511_inseption_type.cs" />
+    <Compile Include="Migrations\201902052324511_inseption_type.Designer.cs">
+      <DependentUpon>201902052324511_inseption_type.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902052336339_inseption_model.cs" />
+    <Compile Include="Migrations\201902052336339_inseption_model.Designer.cs">
+      <DependentUpon>201902052336339_inseption_model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902060837405_Recruitment.cs" />
+    <Compile Include="Migrations\201902060837405_Recruitment.Designer.cs">
+      <DependentUpon>201902060837405_Recruitment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902060934059_test.cs" />
+    <Compile Include="Migrations\201902060934059_test.Designer.cs">
+      <DependentUpon>201902060934059_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902072214429_union_identity_contex.cs" />
+    <Compile Include="Migrations\201902072214429_union_identity_contex.Designer.cs">
+      <DependentUpon>201902072214429_union_identity_contex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902072254044_foreign_keys_for_users.cs" />
+    <Compile Include="Migrations\201902072254044_foreign_keys_for_users.Designer.cs">
+      <DependentUpon>201902072254044_foreign_keys_for_users.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902080333285_add-recruitment-documents.cs" />
+    <Compile Include="Migrations\201902080333285_add-recruitment-documents.Designer.cs">
+      <DependentUpon>201902080333285_add-recruitment-documents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902081452061_property-details.cs" />
+    <Compile Include="Migrations\201902081452061_property-details.Designer.cs">
+      <DependentUpon>201902081452061_property-details.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902232024032_property_detailed_filter.cs" />
+    <Compile Include="Migrations\201902232024032_property_detailed_filter.Designer.cs">
+      <DependentUpon>201902232024032_property_detailed_filter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902232027340_property_departament_foreign_key.cs" />
+    <Compile Include="Migrations\201902232027340_property_departament_foreign_key.Designer.cs">
+      <DependentUpon>201902232027340_property_departament_foreign_key.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902261207588_postal_code.cs" />
+    <Compile Include="Migrations\201902261207588_postal_code.Designer.cs">
+      <DependentUpon>201902261207588_postal_code.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902281445238_property_room_count.cs" />
+    <Compile Include="Migrations\201902281445238_property_room_count.Designer.cs">
+      <DependentUpon>201902281445238_property_room_count.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903071117433_incepotion_postal_code.cs" />
+    <Compile Include="Migrations\201903071117433_incepotion_postal_code.Designer.cs">
+      <DependentUpon>201903071117433_incepotion_postal_code.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906261755402_userRoles.cs" />
+    <Compile Include="Migrations\201906261755402_userRoles.Designer.cs">
+      <DependentUpon>201906261755402_userRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907061318029_property-additionalInfo.cs" />
+    <Compile Include="Migrations\201907061318029_property-additionalInfo.Designer.cs">
+      <DependentUpon>201907061318029_property-additionalInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907290532441__propertydescriptionmax.cs" />
+    <Compile Include="Migrations\201907290532441__propertydescriptionmax.Designer.cs">
+      <DependentUpon>201907290532441__propertydescriptionmax.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908011042588_propertydocumentrowno.cs" />
+    <Compile Include="Migrations\201908011042588_propertydocumentrowno.Designer.cs">
+      <DependentUpon>201908011042588_propertydocumentrowno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AdditionalElementEntity.cs" />
+    <Compile Include="Models\DepartamentEntity.cs" />
+    <Compile Include="Models\MainDepartmentEntity.cs" />
+    <Compile Include="Models\PhysicalPersonEntity.cs" />
+    <Compile Include="Models\DocumentBaseEntity.cs" />
+    <Compile Include="Models\InseptionEntity.cs" />
+    <Compile Include="Models\PostalCodeEntity.cs" />
+    <Compile Include="Models\PropertyAdditionalElementEntity.cs" />
+    <Compile Include="Models\PropertyAgents.cs" />
+    <Compile Include="Models\PropertyDocumentEntity.cs" />
+    <Compile Include="Models\PropertyEntity.cs" />
+    <Compile Include="Models\PropertyFloorEntity.cs" />
+    <Compile Include="Models\PropertyFloorTypeEntity.cs" />
+    <Compile Include="Models\RecruitmentDocumentEntity.cs" />
+    <Compile Include="Models\RegionEntity.cs" />
+    <Compile Include="Models\RecruitmentEntity.cs" />
+    <Compile Include="Models\UserPostalCodeEntity.cs" />
+    <Compile Include="ProjectDbContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DaddyAgencies.Application\DaddyAgencies.Application.csproj">
+      <Project>{a728078d-92bb-4cc0-bb65-b6f08df2a909}</Project>
+      <Name>DaddyAgencies.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\DaddyAgencies.Common.Application\DaddyAgencies.Common.Application.csproj">
+      <Project>{4DB74BAF-1315-4C27-A2CF-8420A011C1F6}</Project>
+      <Name>DaddyAgencies.Common.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\DaddyAgencies.Common.AutoMapper\DaddyAgencies.Common.AutoMapper.csproj">
+      <Project>{A48AB4F9-C5BA-45B5-8450-7F67AD4578CC}</Project>
+      <Name>DaddyAgencies.Common.AutoMapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\DaddyAgencies.Common.Contracts\DaddyAgencies.Common.Contracts.csproj">
+      <Project>{06C0C529-481E-448B-8A41-7CF9E316DEFC}</Project>
+      <Name>DaddyAgencies.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\DaddyAgencies.Common.EntityFramework.Identity\DaddyAgencies.Common.EntityFramework.Identity.csproj">
+      <Project>{e3929199-36fc-45f8-9fe9-c1ae935ae1ae}</Project>
+      <Name>DaddyAgencies.Common.EntityFramework.Identity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\DaddyAgencies.Common.EntityFramework\DaddyAgencies.Common.EntityFramework.csproj">
+      <Project>{9C5BBBAE-F85C-4F4B-B2BA-B9B5C8F7B6D5}</Project>
+      <Name>DaddyAgencies.Common.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\DaddyAgencies.Common.MediatR\DaddyAgencies.Common.MediatR.csproj">
+      <Project>{EC653BEE-C038-4101-91BE-0216B4D86DBE}</Project>
+      <Name>DaddyAgencies.Common.MediatR</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\DaddyAgencies.Common.Util\DaddyAgencies.Common.Util.csproj">
+      <Project>{5102C844-E660-4D0F-863F-28FA8E41D7C9}</Project>
+      <Name>DaddyAgencies.Common.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201901241150490_region_property_init.resx">
+      <DependentUpon>201901241150490_region_property_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901261511220_documents.resx">
+      <DependentUpon>201901261511220_documents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901262143551_inception.resx">
+      <DependentUpon>201901262143551_inception.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901271738065_physical-person.resx">
+      <DependentUpon>201901271738065_physical-person.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901272120475_inseption-edited.resx">
+      <DependentUpon>201901272120475_inseption-edited.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901280512152_latlong_scale.resx">
+      <DependentUpon>201901280512152_latlong_scale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902051201598_region_table.resx">
+      <DependentUpon>201902051201598_region_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902051940281_remove_reuqire_inseption_user.resx">
+      <DependentUpon>201902051940281_remove_reuqire_inseption_user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902052324511_inseption_type.resx">
+      <DependentUpon>201902052324511_inseption_type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902052336339_inseption_model.resx">
+      <DependentUpon>201902052336339_inseption_model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902060837405_Recruitment.resx">
+      <DependentUpon>201902060837405_Recruitment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902060934059_test.resx">
+      <DependentUpon>201902060934059_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902072214429_union_identity_contex.resx">
+      <DependentUpon>201902072214429_union_identity_contex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902072254044_foreign_keys_for_users.resx">
+      <DependentUpon>201902072254044_foreign_keys_for_users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902080333285_add-recruitment-documents.resx">
+      <DependentUpon>201902080333285_add-recruitment-documents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902081452061_property-details.resx">
+      <DependentUpon>201902081452061_property-details.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902232024032_property_detailed_filter.resx">
+      <DependentUpon>201902232024032_property_detailed_filter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902232027340_property_departament_foreign_key.resx">
+      <DependentUpon>201902232027340_property_departament_foreign_key.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902261207588_postal_code.resx">
+      <DependentUpon>201902261207588_postal_code.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902281445238_property_room_count.resx">
+      <DependentUpon>201902281445238_property_room_count.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903071117433_incepotion_postal_code.resx">
+      <DependentUpon>201903071117433_incepotion_postal_code.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906261755402_userRoles.resx">
+      <DependentUpon>201906261755402_userRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907061318029_property-additionalInfo.resx">
+      <DependentUpon>201907061318029_property-additionalInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907290532441__propertydescriptionmax.resx">
+      <DependentUpon>201907290532441__propertydescriptionmax.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908011042588_propertydocumentrowno.resx">
+      <DependentUpon>201908011042588_propertydocumentrowno.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

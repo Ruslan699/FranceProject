@@ -1,0 +1,22 @@
+﻿.caption-title-mb {
+    text-align: center;
+}
+.caption-title-mb h4 {
+    text-transform: uppercase;
+    font-weight: 500 !important;
+    font-size: 18px !important;
+    color: #427283;
+}
+.col-12 .col-sm-12 .col-md-5 .col-lg-5 .prop-image-wait img {
+    height: 213px !important;
+}
+.description-mb {
+    background-color: rgba(66, 114, 131, 0.7);
+    position: absolute;
+    margin-top: 160px !important;
+    margin: 0;
+    left: 0%;
+    right: 0%;
+    color: white;
+    z-index: 999999
+}

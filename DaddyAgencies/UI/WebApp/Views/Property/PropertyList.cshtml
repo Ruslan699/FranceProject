@@ -1,0 +1,345 @@
+﻿@using WebApp.Controllers
+@using WebApp.Models
+@model PropertyFilter
+
+
+<div class="container pm-xs-0 pm-sm-0 pm-md-0">
+    <div class="card bg-light">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row">
+                        @Html.Partial("_PropertyFilterPartial", Model)
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card bg-light">
+                        <div class="card-header" style="margin-bottom:30px">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-8 col-lg-8">
+                                    <h5>@StaticUI.SearchResults</h5>
+                                </div>
+                                <div class="col-sm-6 col-md-4 col-lg-4">
+                                    <select class="form-control form-control-sm" id="sortby" name="sortby">
+                                        <option class="sortby" value="1"> Date </option>
+                                        <option class="sortby" value="2"> Surface </option>
+                                        <option class="sortby" value="3"> Prix croissant </option>
+                                        <option class="sortby" value="4"> Prix decroissant </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body p-0 pt-1 pm-sm-0">
+                            <div id="propertyContainer" class="col-md-12 pm-xs-0 pm-sm-0 pm-md-0">
+                            </div>
+                            <div id="loader" class="loader"></div>
+                            <div id="noReults" class="noDisplay p-3">
+                                <h5 class="text-center">Aucun bien disponible actuellement selon vos critères.</h5>
+                                @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                        Créer une alerte!
+                                    </button>*@
+                                <p class="text-left">
+                                    Preparez-vous Papa arrive très bientôt sur votre région!! Contactez nous des maintenant sur notre page Facebook les agences de Papa ou par mail: info@lesagencesdepapa.fr
+                                </p>
+                            </div>
+                            <nav aria-label="Page navigation example">
+                                <ul id="paginationContainer" class="pagination justify-content-center"></ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            @Html.Label(StaticUI.FullnameFormLabel, new { @for = "inputFullname", @class = "control-label" })
+                            @Html.TextBox("FullName", "", new { @id = "inputFullname", @class = "form-control", placeholder = StaticUI.FullnameFormPlaceholder })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            @Html.Label(StaticUI.EmailFormLabel, new { @for = "inputFullname", @class = "control-label" })
+                            @Html.TextBox("Email", "", new { @id = "inputFullname", @class = "form-control", placeholder = StaticUI.EmailFormPlaceholder })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="modal-footer">
+                    <button type="button" onclick="saveNotification()" class="btn btn-primary">Créer une alerte!</button>
+                </div>*@
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+
+    
+
+
+
+<script>
+        var take = 20;
+        var totalCount = 0;
+        var currentPage = 1;
+        var totalPages = 1;
+
+        var regions = [];
+        var departaments = [];
+        var departamentSelector = [];
+
+        function saveNotification() {
+            window.location = '@Url.Action("Index", "Property")';
+        }
+
+        function loadProperties() {
+            $('#loader').show();
+            var postData = getFilterPostData();
+            var searchCountUrl = '@Url.Action("GetTotalCount", "Property")';
+            $.ajax({
+                method: "POST",
+                url: searchCountUrl,
+                data: postData,
+                success: function (counter) {
+                    if (totalCount !== counter) {
+                        resetPagination(counter);
+                    }
+                    fillProperties();
+                    setPaginationView();
+                },
+                error: function (error) {
+                    return [];
+                }
+            });
+
+        }
+
+        function setPaginationView() {
+            $('#paginationContainer').html(
+                '<li class="page-item">' +
+                '   <a class="page-link" onclick="changePage(' + 1 + ')" aria-label="Previous">' +
+                '       <span aria-hidden="true">&laquo;</span>' +
+                '       <span class="sr-only">Previous</span>' +
+                '   </a>' +
+                '</li>' +
+                '<li class="page-item">' +
+                '   <a class="page-link" onclick="changePage(' + (currentPage - 10) + ')" aria-label="Next">' +
+                '       <span aria-hidden="true"><</span>' +
+                '       <span class="sr-only">Next</span>' +
+                '   </a>' +
+                '</li>'
+                + getPaginationButtonView() +
+                '<li class="page-item">' +
+                '   <a class="page-link" onclick="changePage(' + (currentPage + 10) + ')" aria-label="Next">' +
+                '       <span aria-hidden="true">></span>' +
+                '       <span class="sr-only">Next</span>' +
+                '   </a>' +
+                '</li>' +
+                '<li class="page-item">' +
+                '   <a class="page-link" onclick="changePage(' + totalPages + ')" aria-label="Next">' +
+                '       <span aria-hidden="true">&raquo;</span>' +
+                '       <span class="sr-only">Next</span>' +
+                '   </a>' +
+                '</li>');
+        }
+
+        function changePage(page) {
+            if (page < 1) {
+                page = 1;
+            }
+            if (page > totalPages) {
+                page = totalPages;
+            }
+            if (currentPage !== page) {
+                window.location = '#';
+                currentPage = page;
+                loadProperties();
+            }
+        }
+
+        function getPaginationButtonView() {
+            var html = '';
+            var start = 1;
+
+            if (currentPage > 3)
+                start = currentPage - 2;
+
+            var total = 4 + start;
+            if (totalPages < total)
+                total = totalPages;
+
+            for (var i = start; i <= total; i++) {
+                if (currentPage === i) {
+                    html += '<li class="page-item active">' +
+                        '   <a class="page-link">' + i + ' <span class="sr-only">(current)</span></a>' +
+                        '</li>';
+                } else {
+                    html += '<li class="page-item"><a class="page-link" onclick="changePage(' + i + ')">' + i + '</a></li>';
+                }
+            }
+
+            return html;
+        }
+
+        function resetPagination(counter) {
+            totalCount = counter;
+            currentPage = 1;
+            totalPages = Math.ceil(totalCount / take);
+        }
+
+        function fillProperties() {
+            var searchUrl = '@Url.Action("Search", "Property")';
+            var postData = getFilterPostData();
+
+            $.ajax({
+                method: "POST",
+                url: searchUrl,
+                data: postData,
+                success: function (result) {
+                    var propertyContainer = $('#propertyContainer');
+                    if (result.length === 2) {
+                        $('#noReults').removeClass('noDisplay');
+                    } else {
+                        propertyContainer.html(result);
+                        $('.prop-image-wait').each(function (i, e) {
+                            var id = e.id.replace('_img', '');
+                            loadImageThumnail(id);
+                        });
+                    }
+                    $('#loader').hide();
+                },
+                error: function (error) {
+                    $('#loader').hide();
+                    return [];
+                }
+            });
+        }
+
+        function getFilterPostData() {
+            departamentSelector.push($('#departamentSelector').val());
+            var skipVal = take * (currentPage - 1);
+            if (isNaN(skipVal)) {
+                skipVal = 0;
+            }
+            return {
+                sortby: $('#sortby').val(),
+                skip: skipVal,
+                take: take,
+                keyword: $("#keyword").val(),
+                postalCode: $("#postalcode").val(),
+                priceMin: $("#priceMin").val(),
+                priceMax: $("#priceMax").val(),
+                roomsMin: $("#roomsMin").val(),
+                roomsMax: $("#roomsMax").val(),
+                squareMin: $("#squareMin").val(),
+                squareMax: $("#squareMax").val(),
+                parking: $('#Parking').val(),
+                energyClass: $('#EnergyClass').val(),
+                ges: $('#Ges').val(),
+
+                isBuilding: $("#IsBuildingCheck").prop("checked"),
+                isApartment: $("#IsApartmentCheck").prop("checked"),
+                isCottage: $("#IsCottageCheck").prop("checked"),
+                isArea: $("#IsAreaCheck").prop("checked"),
+                isParking: $("#IsParkingCheck").prop("checked"),
+                isOther: $("#IsOtherCheck").prop("checked"),
+
+                selectedRegions: $.map($("#regionSelector").val(), function (val, i) {
+                    return val;
+                }),
+                selectedDepartaments: $.map(departamentSelector, function (val, i) {
+                    return val;
+                }),
+                selectedPostalCodes: $.map($("#postalCodeSelector").val(), function (val, i) {
+                    return val;
+                }),
+                selectedTypes: $.map($("#typeSelector").val(), function (val, i) {
+                    return val;
+                }),
+                selectedFloors: $.map($("#floorSelector").val(), function (val, i) {
+                    return val;
+                })
+            };
+        }
+
+        function loadImageThumnail(propId) {
+            var searchUrl = '@Url.Action("GetPropetyThumbnail", "Document", new { propertyUid = "p__Uid_"})';
+            searchUrl = searchUrl.replace('p__Uid_', propId);
+            $.ajax({
+                method: "GET",
+                url: searchUrl,
+                success: function (result) {
+                    if (result.length < 37)
+                        $("#" + propId + "_img").html('<img style="height: 100%; width: 100%;" src="/Document/GetPropertyImage/' + result + '" alt="' + propId + '" id="preview_' + propId + '" />');
+                    else
+                        $("#" + propId + "_img").html('<img style="height: 100%; width: 100%;" src="/images/no-image.png" alt="' + propId + '" id="preview_' + propId + '" />');
+                },
+                error: function (error) {
+                    console.log('Imageerror');
+                    console.log(error);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            configureFilter(@Html.Raw(Json.Encode(Model.AllRegions)));
+
+            $("#regionSelector").val(@Html.Raw(Json.Encode(Model.SelectedRegions)));
+            $("#departamentSelector").val(@Html.Raw(Json.Encode(Model.SelectedDepartaments)));
+            $("#postalCodeSelector").val(@Html.Raw(Json.Encode(Model.SelectedPostalCodes)));
+
+            loadProperties();
+        });
+
+        function openDetail(uid) {
+            var link = '@Url.Action("GetDetails", "Property", new { uid = "p__uid_" })';
+            link = link.replace('p__uid_', uid);
+            window.location = link;
+        }
+
+       
+        $('#sortby').change(function () {
+            var sortby = $(this).val();
+            var searchUrl = '@Url.Action("SortBy", "Property")';
+            var postData = getFilterPostData();
+
+            $.ajax({
+                method: "POST",
+                url: searchUrl,
+                data: postData,
+                success: function (result) {
+                    var propertyContainer = $('#propertyContainer');
+                    if (result.length === 2) {
+                        $('#noReults').removeClass('noDisplay');
+                    } else {
+                        propertyContainer.html(result);
+                        $('.prop-image-wait').each(function (i, e) {
+                            var id = e.id.replace('_img', '');
+                            loadImageThumnail(id);
+                        });
+                    }
+                    $('#loader').hide();
+                },
+                error: function (error) {
+                    $('#loader').hide();
+                    return [];
+                }
+            });
+    })
+
+    </script>
+}
+

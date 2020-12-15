@@ -1,0 +1,73 @@
+﻿@model WebApp.Models.RegisterViewModel
+
+<div class="container mt-3">
+    <div class="card bg-light">
+        <div class="card-header">
+            <h3>@StaticUI.RegisterCardHeader</h3>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.HiddenFor(x => x.InseptionUid);
+
+                if (Model == null)
+                {
+                    <h5 class="card-title">@StaticUI.RegisterCardTitle</h5>
+                }
+                else
+                {
+                    <div class="row">
+                        <img class="mx-4" src="~/images/successicon.png" height="30" width="30" />
+                        <h5>@StaticUI.SuccessOperationCanRegister</h5>
+                    </div>
+                }
+
+                @Html.AntiForgeryToken()
+                <hr />
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.Label(StaticUI.FullnameFormLabel, new { @for = "inputFullname", @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Fullname, new { @id = "inputFullname", @class = "form-control", placeholder = StaticUI.FullnameFormPlaceholder })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.Label(StaticUI.EmailFormLabel, new { @for = "inputEmail", @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Email, new { @id = "inputEmail", @class = "form-control", placeholder = StaticUI.EmailFormPlaceholder })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.Label(StaticUI.PhoneFormLabel, new { @for = "inputPhoneNumber", @class = "control-label" })
+                            @Html.TextBoxFor(m => m.PhoneNumber, new { @id = "inputPhoneNumber", @class = "form-control", placeholder = StaticUI.PhoneFormPlaceholder })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.Label(StaticUI.PasswordFormLabel, new { @for = "inputPassword", @class = "control-label" })
+                            @Html.PasswordFor(m => m.Password, new { @id = "inputPassword", @class = "form-control", placeholder = StaticUI.PasswordFormPlaceholder })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.Label(StaticUI.ConfirmPasswordFormLabel, new { @for = "inputConfirmPassword", @class = "control-label" })
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @id = "inputConfirmPassword", @class = "form-control", placeholder = StaticUI.ConfirmPasswordFormPlaceholder })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="submit" class="btn btn-success float-md-right" value="@StaticUI.RegisterButton" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

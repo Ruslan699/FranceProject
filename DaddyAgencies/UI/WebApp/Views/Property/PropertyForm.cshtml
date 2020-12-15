@@ -1,0 +1,281 @@
+﻿@using WebApp.Controllers
+@using WebApp.Models
+@model WebApp.Models.PropertyDraftModel
+
+<div class="container-fluid">
+    <div class="card bg-light">
+        <div class="card-header">
+            Property form
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("SaveProperty", "Property", FormMethod.Post,
+                 new { enctype = "multipart/form-data", id = "orderForm" }))
+            {
+                @Html.AntiForgeryToken();
+                @Html.HiddenFor(m => m.Uid)
+
+                <div class="form-group">
+                    @Html.Label(StaticUI.PropertyCaptionLabel, new { @for = "propertyCaption", @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Caption, new { @id = "propertyCaption", @class = "form-control", @placeholder = StaticUI.PropertyCaptionPlaceHolder })
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        @Html.Label(StaticUI.PropertyPostalCodeLabel, new { @for = "propertyPostalCode", @class = "control-label" })
+                        @Html.TextBoxFor(m => m.PostalCode, new { @id = "propertyPostalCode", @class = "form-control", @placeholder = StaticUI.PropertyPostalCodePlaceHolder })
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.Label(StaticUI.PropertyRegionUidLabel, new { @for = "regionSelector", @class = "control-label" })
+                        @Html.DropDownListFor(m => m.RegionUid, Model.Regions, new
+                        {
+                            @id = "regionSelector",
+                            @class = "form-control selectpicker ",
+                            @data_live_search = "true"
+                        })
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        @Html.Label(StaticUI.PropertySalePriceLabel, new { @for = "propertySalePrice", @class = "control-label" })
+                        @Html.TextBoxFor(m => m.SalePrice, new { @id = "propertySalePrice", @class = "form-control", @placeholder = StaticUI.PropertySalePricePlaceHolder })
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.Label(StaticUI.PropertyTotalSquareLabel, new { @for = "propertyTotalSquare", @class = "control-label" })
+                        @Html.TextBoxFor(m => m.TotalSquare, new { @id = "propertyTotalSquare", @class = "form-control", @placeholder = StaticUI.PropertyTotalSquarePlaceHolder })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label(StaticUI.PropertyDescriptionLabel, new { @for = "propertyDescription", @class = "control-label" })
+                    @Html.TextAreaFor(m => m.Description, new { @id = "propertyDescription", @class = "form-control", @placeholder = StaticUI.PropertyDescriptionPlaceHolder })
+                </div>
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        @Html.Label(StaticUI.PropertyAddressLabel, new { @for = "propertyAddress", @class = "control-label" })
+                        <div class="form-row">
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Address, new { @id = "propertyAddress", @class = "form-control", @placeholder = StaticUI.PropertyAddressPlaceHolder })
+                            </div>
+                            <div class="col-md-1">
+                                <i onclick="loadAdresses()" class="btn btn btn-outline-secondary btn-block"><i class="fa fa-search"></i> </i>
+                            </div>
+                            <div class="col-md-1">
+                                <i onclick="resetAddress()" class="btn btn btn-outline-secondary btn-block"><i class="fa fa-trash"></i> </i>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="searchResults">
+                                    <div class="shadow p-3 mb-1 bg-white rounded">
+                                        <p>@StaticUI.StartTypingToSearch</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <p class="card-title"> @StaticUI.PropertyMapTitleLabel <span class="fa-active" onclick="resetAddress()"><small>@StaticUI.PropertyResetMarkerLabel</small><i class="m-2 fa fa-map-marker"></i></span></p>
+                        <div id='map' style='margin: 0px; height: 318px'>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                @Html.Label(StaticUI.PropertyLongitudeLabel, new { @for = "propertyLongitude", @class = "control-label" })
+                                @Html.TextBoxFor(m => m.Longitude, new { @id = "propertyLongitude", @class = "form-control", @readonly = "readonly"})
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label(StaticUI.PropertyLatitudeLabel, new { @for = "propertyLatitude", @class = "control-label" })
+                                @Html.TextBoxFor(m => m.Latitude, new { @id = "propertyLatitude", @class = "form-control", @readonly = "readonly"})
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label(StaticUI.PropertyImagesLabel, new { @for = "images", @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Images, "", new
+                    {
+                        @multiple = "multiple",
+                        @onchange = "preview_images();",
+                        @class = "btn btn-file visible",
+                        type = "file",
+                        accept = "image/*",
+                        id = "images",
+                        @name = "images[]"
+                    })
+                </div>
+
+                <div class="form-row" id="image_preview"></div>
+
+                <div class="form-group ml-4">
+                    @Html.TextBoxFor(m => m.CreateAnother, new { @class = "form-check-input", type = "checkbox", value = "", id = "defaultCheck1" })
+                    @Html.Label(StaticUI.PropertyNotCloseCheck, new { @class = "form-check-label", @for = "defaultCheck1" })
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">@StaticUI.PropertySubmitButton</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
+    <script>
+        var map;
+        var marker;
+        var markerHeight = 50, markerRadius = 10, linearOffset = 25;
+        var popupOffsets = {
+            'top': [0, 0],
+            'top-left': [0, 0],
+            'top-right': [0, 0],
+            'bottom': [0, -markerHeight],
+            'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+            'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+            'left': [markerRadius, (markerHeight - markerRadius) * -1],
+            'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+        };
+        var typingTimer;
+        var doneTypingInterval = 500;
+        var $input = $('#propertyAddress');
+
+        $input.on('keyup', function () {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(loadAdresses, doneTypingInterval);
+        });
+
+        $input.on('keydown', function () {
+            clearTimeout(typingTimer);
+        });
+
+        function resetAddress() {
+            selectAddress(2.3522, 48.8566, null, 11);
+        }
+
+        function addPropertyDocument() {
+            var searchUrl = '@Url.Action("AddPropertyDocument", "Property")';
+            $.ajax({
+                method: "GET",
+                url: searchUrl,
+                success: function(result) {
+                    var detailDiv = $('#filecontainer');
+                    detailDiv.append(result);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function preview_images()
+        {
+            var totalFile = document.getElementById("images").files.length;
+            $('#image_preview').html('');
+            for(var i=0;i<totalFile;i++)
+            {
+                $('#image_preview').append("<div class='col-md-3'><img style='max-height: 200px;' width=100% class='img-responsive' src='"+URL.createObjectURL(event.target.files[i])+"'></div>");
+            }
+        }
+
+        function loadAdresses() {
+            var url = "https://api.mapbox.com/geocoding/v5/mapbox.places/p__search_.json?limit=5&access_token=pk.eyJ1IjoicmFzaW1pc21hdHVsaW4iLCJhIjoiY2pyN28xNjFoMDB0bTQxbWh6YTZkOTRrYSJ9.7J1ZBQwdpSJZS9ZEZQURzw";
+            var address = $('#propertyAddress').val();
+            url = url.replace('p__search_', address);
+            console.log(url);
+            $.ajax({
+                method: "GET",
+                url: url,
+                success: function (result) {
+                    console.log(result);
+                    var elements = $();
+                    jQuery.each(result.features,
+                        function (i, e) {
+                            elements = elements.add('<div onclick="selectAddress(\'' + e.center[0] + '\',\'' + e.center[1] + '\', \' ' + e.place_name + '\')" class="shadow p-3 mb-1 linked-container bg-white rounded"><p>' + e.place_name + '</p><i class="fa fa-lg fa-arrow-circle-o-right"></i></div>');
+                        });
+                    $('#searchResults').html(elements);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function selectAddress(p1, p2, address, zoom) {
+            if (!zoom)
+                zoom = 17;
+            addMarker(p1, p2, zoom);
+            if (address) {
+                $('#propertyAddress').val(address);
+                clearTimeout(typingTimer);
+                typingTimer = setTimeout(loadAdresses, doneTypingInterval);
+            }
+        }
+
+
+        function addMarker(longitude, latitude, zoom) {
+
+            $('#propertyLongitude').val(longitude);
+            $('#propertyLatitude').val(latitude);
+
+            if (marker) {
+                marker.remove();
+            }
+
+            marker = new window.mapboxgl.Marker({
+                    draggable: true
+                })
+                .setLngLat([longitude, latitude])
+                .addTo(map);
+
+            marker.on('dragend', onMarkerDragged);
+            map.setCenter([longitude, latitude]);
+            map.setZoom(zoom);
+        }
+
+        function onMarkerDragged() {
+            var lngLat = marker.getLngLat();
+            $('#propertyLongitude').val(lngLat.lng);
+            $('#propertyLatitude').val(lngLat.lat);
+        }
+
+
+        $(document).ready(function () {
+            $('#propertySalePrice').val('');
+            $('#propertyTotalSquare').val('');
+
+            $(".dropdown-toggle").each(function (i, e) {
+                    $(e).addClass("form-control");
+                    $(e).addClass("btn-white");
+            });
+
+            window.mapboxgl.accessToken =
+                'pk.eyJ1IjoicmFzaW1pc21hdHVsaW4iLCJhIjoiY2pyN28xNjFoMDB0bTQxbWh6YTZkOTRrYSJ9.7J1ZBQwdpSJZS9ZEZQURzw';
+            map = new window.mapboxgl.Map({
+                container: 'map',
+                center: [2.3522, 48.8566],
+                zoom: 6.40,
+                attributionControl: false,
+                style: 'mapbox://styles/mapbox/streets-v11'
+            });
+            var scale = new window.mapboxgl.ScaleControl({
+                maxWidth: 100,
+                unit: 'metric'
+            });
+            map.addControl(scale);
+            map.addControl(new window.mapboxgl.NavigationControl(), 'top-right');
+            map.addControl(new window.mapboxgl.GeolocateControl({
+                positionOptions: {
+                    enableHighAccuracy: true
+                },
+                trackUserLocation: true
+            }));
+            resetAddress();
+        });
+    </script>
+}
+

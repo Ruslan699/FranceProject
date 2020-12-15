@@ -1,0 +1,56 @@
+﻿@model WebApp.Models.LoginViewModel
+
+
+<div class="container mt-3">
+    <div class="card bg-light">
+        <div class="card-header">
+            @*<h3>@StaticUI.LoginCardHeader</h3>*@
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Login", "Account", new { ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                if (Model == null)
+                {
+                    <h5>@StaticUI.LoginCardTitle</h5>
+                }
+                else
+                {
+                    <div class="row">
+                        <img class="mx-4" src="~/images/successicon.png" height="30" width="30" />
+                        <h5>@StaticUI.SuccessOperationCanLogin</h5>
+                    </div>
+                }
+                @Html.AntiForgeryToken()
+                <hr />
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    <div class="row">
+                        @Html.Label(StaticUI.EmailFormLabel, new { @for = "inputEmail", @class = "col -md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Email, new { @id = "inputEmail", @class = "form-control", placeholder = StaticUI.EmailFormPlaceholder })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+
+                        @Html.Label(StaticUI.PasswordFormLabel, new { @for = "inputPassword", @class = "col -md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.Password, new { @id = "inputPassword", @class = "form-control", placeholder = StaticUI.PasswordFormPlaceholder })
+                        </div>
+                    </div>
+                </div>
+                @*<div class="form-group">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <input type="submit" class="btn btn-primary" value="@StaticUI.LoginButton" />
+                        </div>
+                    </div>
+                </div>*@
+            }
+        </div>
+    </div>
+</div>
+
+

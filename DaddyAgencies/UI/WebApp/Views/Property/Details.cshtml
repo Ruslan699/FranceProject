@@ -1,0 +1,428 @@
+﻿@using System.Globalization
+@using WebApp.Helpers
+@using WebApp.Models
+@model WebApp.Models.PropertyModel
+@using DaddyAgencies.Application.Models.Enums;
+@using System.ComponentModel;
+@using System.Reflection;
+@section styles{
+    @*<link rel="stylesheet" type="text/css" href="~/App/DetailSlider/style.css" />*@
+    <link href="~/Content/jquery.fancybox.min.css" rel="stylesheet" />
+    <link href="~/App/jssor.slider.css" rel="stylesheet" />
+
+}
+@{
+    ViewBag.Url = Context.Request.Url;
+    ViewBag.Type = "product";
+    ViewBag.Title = String.Format(StaticUI.PropertyDetailCardHeader, Model.Caption, String.Format("{0:0.##}", Model.TotalSquare));
+    ViewBag.Description = Model.Description;
+    List<string> PropertyImages = new List<string>();
+    foreach (var item in Model.PropertyImageIds)
+    {
+        PropertyImages.Add(Url.Action("GetPropertyImage", "Property", new { id = item }));
+    }
+    ViewBag.Images = PropertyImages;
+}
+
+<div class="container pm-xs-0 pm-sm-0 pm-md-0">
+    @Html.HiddenFor(x => Model.RegionUid)
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card bg-light">
+                <div class="card-header">
+                    <a class="btn btn-primary" href="javascript:history.back()">Retour</a>
+                    @*<button class="btn btn-primary" id="previous" type="button" onclick="location.href='@Url.Action("PropertyListForm", "Property")'">Retour</button>*@
+                    <br />
+                    <br />
+                    <h5>@String.Format(StaticUI.PropertyDetailCardHeader, Model.Caption, String.Format("{0:0.##}", Model.TotalSquare))</h5>
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Address</h5>
+
+
+                    
+                    <div class="">
+                        <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:980px;height:600px;overflow:hidden;visibility:hidden;">
+                            <!-- Loading Screen -->
+                            <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
+                                <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="~/images/svg/loading/static-svg/spin.svg" />
+                            </div>
+                            <div data-u="slides" id="detailSlider" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:500px;overflow:hidden;">
+                                @if (Model.PropertyImageIds.FirstOrDefault() != default(Guid))
+                                {
+                                    foreach (var item in Model.PropertyImageIds)
+
+                                    {
+                                        <div style="text-align:center;background-color:#1c2331;padding:10px">
+                                            <a href="@Url.Action("GetPropertyImage", "Property", new { id = item })" data-fancybox="images" data-caption="">
+                                                <img style="width:auto;height:100% !important;" src="@Url.Action("GetPropertyImage", "Property", new { id = item })" />
+                                            </a>
+                                            <img data-u="thumb" src="@Url.Action("GetPropertyImage", "Property", new { id = item })" />
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div style="text-align:center;background-color:#1c2331;padding:10px">
+                                        <a href="/images/no-image.png" data-fancybox="images" data-caption="">
+                                            <img style="width:auto;height:100% !important;" src="/images/no-image.png" />
+                                        </a>
+                                        <img data-u="thumb" src="/images/no-image.png" />
+                                    </div>
+                                }
+
+                            </div>
+                            <!-- Thumbnail Navigator -->
+                            <div data-u="thumbnavigator" class="jssort101" style="position:absolute;left:0px;bottom:0px;width:980px;height:100px;background-color:#000;" data-autocenter="1" data-scale-bottom="0.75">
+                                <div data-u="slides">
+                                    <div data-u="prototype" class="p" style="width:190px;height:84px;">
+                                        <div data-u="thumbnailtemplate" class="t"></div>
+                                        <svg viewBox="0 0 16000 16000" class="cv">
+                                            <circle class="a" cx="8000" cy="8000" r="3238.1"></circle>
+                                            <line class="a" x1="6190.5" y1="8000" x2="9809.5" y2="8000"></line>
+                                            <line class="a" x1="8000" y1="9809.5" x2="8000" y2="6190.5"></line>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Arrow Navigator -->
+                            <div data-u="arrowleft" class="jssora106" style="width:55px;height:55px;top:262px;left:30px;" data-scale="0.75">
+                                <svg viewBox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                                    <circle class="c" cx="8000" cy="8000" r="6260.9"></circle>
+                                    <polyline class="a" points="7930.4,5495.7 5426.1,8000 7930.4,10504.3 "></polyline>
+                                    <line class="a" x1="10573.9" y1="8000" x2="5426.1" y2="8000"></line>
+                                </svg>
+                            </div>
+                            <div data-u="arrowright" class="jssora106" style="width:55px;height:55px;top:262px;right:30px;" data-scale="0.75">
+                                <svg viewBox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                                    <circle class="c" cx="8000" cy="8000" r="6260.9"></circle>
+                                    <polyline class="a" points="8069.6,5495.7 10573.9,8000 8069.6,10504.3 "></polyline>
+                                    <line class="a" x1="5426.1" y1="8000" x2="10573.9" y2="8000"></line>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    @*<div class="">
+                            <div id="wowslider-container1">
+                                <div class="ws_images">
+                                    <ul id="detailSlider" class="imglist"></ul>
+                                </div>
+                                <div class="ws_bullets">
+                                    <div id="ws_bullets_container">
+                                    </div>
+                                </div>
+                                <div class="ws_shadow"></div>
+                            </div>
+                        </div>*@
+
+
+                    <br />
+                    <div id="fb-root"></div>
+                    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.3&appId=1168882863286421&autoLogAppEvents=1"></script>
+
+                    <div class="fb-share-button" data-href="@Context.Request.Url" data-layout="button" data-size="small">
+                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=@Context.Request.Url" class="fb-xfbml-parse-ignore">Partager</a>
+                    </div>
+
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5 col-lg-5">
+                            <p class="text-muted">Type de bien</p>
+                            <p class="font-weight-normal">
+                                @{
+                                    string GetDescription(Enum value)
+                                    {
+                                        FieldInfo fi = value.GetType().GetField(value.ToString());
+                                        DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+                                        if (attributes.Length > 0)
+                                            return attributes[0].Description;
+                                        else
+                                            return value.ToString();
+                                    }
+                                }
+
+                                @GetDescription((PropertyType)Model.PropertyType)
+                            </p>
+                        </div>
+                        <div class="col-sm-12 col-md-5 col-lg-5">
+                            <p class="text-muted">Code Postal</p>
+                            <p class="font-weight-normal">@Model.PostalCode</p>
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <p class="text-muted">Parking</p>
+                            <p class="font-weight-normal">@Model.Parking</p>
+                        </div>
+                    </div>
+                    <br /> <hr />
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <p class="text-muted">Surface</p>
+                            <p class="font-weight-bold">@String.Format(StaticUI.PropertyDetailCardSquareText, @Model.TotalSquare)</p>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <p class="text-muted">Nombre de pièces</p>
+                            <p class="font-weight-bold">@Model.RoomsCount</p>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <p class="text-muted">Classe énergétique</p>
+                            <p class="font-weight-bold">@Model.EnergyClass</p>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <p class="text-muted">GES</p>
+                            <p class="font-weight-bold">@Model.Ges</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                    <br /> <hr />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 class="text-muted">@StaticUI.PropertyDetailDescriptionLabel</h5>
+                            <p class="font-weight-normal">@Model.Description</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-light sticky-top">
+                <div class="card-header">
+                    <h5 id="salePriceText">@StaticUI.PropertyDetailSalePriceLabel</h5>
+                    <em style="font-size: 11px;">(Frais Agences Inclus)</em>
+                </div>
+                <div class="card-body">
+                    @if (Model.Uid.HasValue)
+                    {
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            @Html.Partial("_IncpetionPartial", new InseptionModel
+                       {
+                           PropertyUid = Model.Uid.Value,
+                           RegionUid = Model.RegionUid,
+                           CustomerEmail = User.GetEmail(),
+                           CustomerName = User.GetFullName(),
+                           CustomerPhone = User.GetPhoneNumber(),
+                           AcceptText = $"Je confirme avoir la capacité de financerce bien à {Model.SalePrice} €"
+                       })
+                        }
+                        else
+                        {
+                            @Html.Partial("_IncpetionPartial", new InseptionModel
+                            {
+                                PropertyUid = Model.Uid.Value,
+                                RegionUid = Model.RegionUid,
+                                AcceptText = $"Je confirme avoir la capacité de financer ce bien à"
+                            })
+                        }
+                    }
+                    else
+                    {
+                        <p>Can't generate inseption model</p>
+                    }
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    @*<script type="text/javascript" src="~/App/DetailSlider/wowslider.js"></script>*@
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
+
+    <script type="text/javascript" src="~/App/jssor.slider.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/jquery.fancybox.min.js"></script>
+    <script>
+        $('[data-fancybox="images"]').fancybox({
+            // Options will go here
+        });
+        $().fancybox({
+            selector: '.imglist a:visible'
+        });
+    </script>
+
+
+
+    <script>
+        var disableDates = [];
+        var hoursList = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+
+
+        function loadAviableInseptionHours() {
+            var postData = JSON.stringify({
+                'propertyUid': '@Model.Uid.Value',
+                'dateString': $("#datepicker").val()
+            });
+            console.log(postData);
+            var searchUrl = '@Url.Action("GetDisableDates", "Inseption")';
+            $.ajax({
+                method: "POST",
+                url: searchUrl,
+                data: postData,
+                contentType: 'application/json',
+                success: function(result) {
+                    $.each(result,
+                        function(i, e) {
+                            var key = {};
+                            var rg = /\/Date\((\d*)\)\//.exec(e.Key);
+                            var date = (rg) ? new Date(+rg[1]) : value;
+                            var day = date.getDate();
+                            var month = date.getMonth() + 1;
+                            var year = date.getFullYear();
+                            if (month.toString().length == 1) {
+                                key.date = day + '-0' + month + '-' + year;
+                            } else {
+                                key.date = day + '-' + month + '-' + year;
+                            }
+                            key.hours = e.Value;
+                            disableDates.push(key);
+                        });
+                    setAviableInseptionDates();
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function setAviableInseptionDates() {
+            var disabled = [];
+            $.each(disableDates,
+                function (i, e) {
+                    if (e.hours.length == hoursList.length) {
+                        disabled.push(e.date);
+                    }
+                });
+            $('#datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                language: 'fr',
+                autoclose: true,
+                startDate: new Date(),
+                datesDisabled: disabled,
+                daysOfWeekDisabled: [0]
+            });
+        }
+
+        function setAviableInseptionHours() {
+            var disabledHours = [];
+            var selectedDate = $("#datepicker").val();
+            $.each(disableDates, function(i, e) {
+                if (e.date == selectedDate)
+                    disabledHours = e.hours;
+            });
+            console.log(disabledHours);
+            var options = [];
+            $.each(hoursList, function (i, e) {
+                var option;
+                console.log(e);
+                console.log(disabledHours.indexOf(e));
+                if (disabledHours.indexOf(e) == -1) {
+                    if (e.toString().length == 1)
+                        option = "<option value='" + e + "'>0" + e + ":00</option>";
+                    else
+                        option = "<option value='" + e + "'>" + e + ":00</option>";
+                } else {
+                    if (e.toString().length == 1)
+                        option = "<option disabled='disabled' value='" + e + "'>0" + e + ":00</option>";
+                    else
+                        option = "<option disabled='disabled' value='" + e + "'>" + e + ":00</option>";
+                }
+                options.push(option);
+            });
+
+            $('.selectpicker').html(options);
+            $('.selectpicker').selectpicker('refresh');
+        }
+
+        function loadPropertryDocuments() {
+            var searchUrl = '@Url.Action("GetPropetyDocuments", "Document", new {propertyUid = Model.Uid})';
+            $.ajax({
+                method: "GET",
+                url: searchUrl,
+                success: function (result) {
+
+                    jQuery.each(result,
+                        function(index, el) {
+                            $("#detailSlider")
+                                .append('<div><a href="' + `data:image/png;base64,${el.AsBase64}` + '" data-fancybox="images"><img src="' + `data:image/png;base64,${el.AsBase64}` + '" alt="' +
+
+                                '" /></a><img data-u="thumb" src="' + `data:image/png;base64,${el.AsBase64}` + '" /></div>');
+                        });
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            $('#submitButton').attr('disabled', 'disabled');
+            loadAviableInseptionHours();
+
+            $('#datepicker').change(function() {
+                setAviableInseptionHours();
+            });
+
+            $('input[type="radio"]').change(function () {
+                console.log($('#isAccepted')[0].checked);
+                if ($('#isAccepted')[0].checked) {
+                    $('#submitButton')
+                        .removeAttr('disabled');
+                } else {
+                    $('#submitButton')
+                        .attr('disabled', 'disabled');
+                }
+            });
+
+            $(".dropdown-toggle").each(function(i, e) {
+                if (e.id != 'dropdownMenuLink') {
+                    $(e).addClass("form-control");
+                    $(e).addClass("btn-white");
+                }
+            });
+
+            var salePrice = '@Model.SalePrice';
+            salePrice = salePrice.replace(',', '.');
+            var cost = formatMoney(salePrice, 0, '.', ' ', '€');
+
+            cost = $('#salePriceText').html() + ' ' +cost;
+            $('#salePriceText').html(cost);
+
+            cost = $('#acceptText').html() + cost;
+            $('#acceptText').html(cost);
+
+            //loadPropertryDocuments();
+
+
+
+            $(".dropdown-toggle").addClass("form-control");
+        });
+
+        function GetPrevious() {
+            $('#previous').click(function () {
+              var announce = '@Url.Action("PropertyList", "Property")'
+            })
+        }
+    </script>
+    <script type="text/javascript" src="~/App/jssorfunction.js"></script>
+    <script type="text/javascript">
+        jssor_1_slider_init();
+    </script>
+}

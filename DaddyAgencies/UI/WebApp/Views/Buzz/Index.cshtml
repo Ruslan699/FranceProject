@@ -1,0 +1,97 @@
+﻿<link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
+
+<div class="container">
+    <div class="card bg-light">
+        <div class="card-header">
+            <h4 style="font-family: 'Courgette', cursive;">Chez Papa, ça se passe comme ça :) </h4>
+        </div>
+        <br />
+        <div class="container" style="margin:0 auto">
+            <h3 style="font-family: 'Courgette', cursive; text-align: center;">
+                Ne balisez pas!!! <br />
+                Avec Les Agences de Papa vendre ou trouver votre bien,  c’est un jeu d’enfant!
+            </h3>
+        </div>
+        <br />
+        <br />
+        <div class="container" style="margin:0 auto">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <iframe src="https://www.youtube.com/embed/gU6C3H9nDrc"
+                        frameborder="0"
+                        allowfullscreen></iframe>
+            </div>
+            <br />
+            <br />
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <iframe frameborder="0"
+                        style="position: relative; width: 100%; margin: 0 auto; display: block"
+                        src="https://www.youtube.com/embed/3GPL0THI01Y  "
+                        allowfullscreen></iframe>
+            </div>
+            <br />
+            <br />
+            <br />
+            <h3 style="font-family: 'Courgette', cursive; text-align: center;">
+                Depuis l’arrivée des Agences de Papa la vie de l’agent immobilier Stéphane a changé
+            </h3>
+            <br />
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <iframe src="https://www.youtube.com/embed/d4zwHlPLlOI"
+                        frameborder="0" style="position: relative; width: 100%; margin: 0 auto; display: block"
+                        border="5px"
+                        allowfullscreen></iframe>
+            </div>
+            <br />
+            <br />
+
+            <h3 style="font-family: 'Courgette', cursive; text-align: center;">
+                Retrouvez Les Agences de Papa sur les réseaux sociaux
+            </h3>
+            <br />
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <iframe src="https://www.youtube.com/embed/YC_f_k_WlPs"
+                        frameborder="0" style="position: relative; width: 100%; margin: 0 auto; display: block"
+                        border="5px"
+                        allowfullscreen></iframe>
+            </div>
+            <br />
+            <br />
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <iframe src="https://www.youtube.com/embed/Q-IDS3tP4ps"
+                        frameborder="0" style="position: relative; width: 100%; margin: 0 auto; display: block"
+                        border="5px"
+                        allowfullscreen></iframe>
+            </div>
+            <br />
+            <br />
+            <br />
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            setIframeWidht();
+        });
+
+        $(window).resize(function () {
+            setIframeWidht();
+        });
+
+
+        function setIframeWidht() {
+            $('iframe').each(function (i, e) {
+                var containerWd = $('.container').width();
+                if (containerWd > 600) {
+                    $(e).width(600);
+                    $(e).height(500);
+                } else {
+                    $(e).width(containerWd - 50);
+                    $(e).height(containerWd - 100);
+                }
+            });
+        }
+    </script>
+}

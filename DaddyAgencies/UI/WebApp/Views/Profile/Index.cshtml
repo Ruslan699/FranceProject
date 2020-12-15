@@ -1,0 +1,149 @@
+﻿@using WebApp.Helpers
+@model WebApp.Models.PhysicalPersonModel
+
+
+<div class="container">
+    <div class="card bg-light">
+        <div class="card-header">
+            <h3 id="salePriceText">@String.Format(StaticUI.ProfileCardHeader, User.GetEmail())</h3>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card bg-light sticky-top">
+                        <div class="card-body">
+                            <h5 class="card-title">@StaticUI.ProfileCardTitle  <span class="fa-active" onclick="editPerson()"><small>@StaticUI.CardEditLink</small><i class="m-2 fa fa-edit"></i></span></h5>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="font-weight-bold">@StaticUI.FullnameFormLabel</p>
+                                </div>
+                                <div class="col-md-12">
+                                    @Html.LabelFor(m => m.FullName, @StaticUI.FullnameFormLabel, new { @class = "control-label" })
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="font-weight-bold">@StaticUI.EmailFormLabel</p>
+                                </div>
+                                <div class="col-md-12">
+                                    @Html.LabelFor(m => m.Email, @StaticUI.EmailFormLabel, new { @class = "control-label" })
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="font-weight-bold">@StaticUI.PhoneFormLabel</p>
+                                </div>
+                                <div class="col-md-12">
+                                    @Html.LabelFor(m => m.PhoneNumber, @StaticUI.PhoneFormLabel, new { @class = "control-label" })
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="font-weight-bold">@StaticUI.SkypeFormLabel</p>
+                                </div>
+                                <div class="col-md-12">
+                                    @Html.LabelFor(m => m.Skype, @StaticUI.SkypeFormLabel, new { @class = "control-label" })
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="font-weight-bold">@StaticUI.AddressFormLabel</p>
+                                </div>
+                                <div class="col-md-12">
+                                    @Html.LabelFor(m => m.Address, @StaticUI.AddressFormLabel, new { @class = "control-label" })
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="font-weight-bold">@StaticUI.DateOfBirthFormLabel</p>
+                                </div>
+                                <div class="col-md-12">
+                                    @Html.LabelFor(m => m.DateOfBirth, @StaticUI.DateOfBirthFormLabel, new { @class = "control-label" })
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="font-weight-bold">@StaticUI.GenderFormLabel</p>
+                                </div>
+                                <div class="col-md-12">
+                                    @Html.LabelFor(m => m.Gender, @StaticUI.GenderFormLabel, new { @class = "control-label" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    @Html.ActionLink(StaticUI.ContinueSearch, "Index", "Property", null, new { @class = "btn btn-info btn-block mb-2" })
+                                    <h5 class="card-title">@StaticUI.ProposalCardHeader <span class="fa-active" onclick="loadInseption()"><small>@StaticUI.CardRefreshLink</small><i class="m-2 fa fa-refresh"></i></span></h5>
+                                    <div id="inseptionsDiv" class="hide">
+                                    </div> 
+                                    <div id="inseptionLoadingDiv">
+                                        <p>@StaticUI.LoadingCardText</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-md-2">
+                    <div class="row">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h5 class="card-title">@StaticUI.FavoriteCardLink<br /><span class="fa-active"><small>@StaticUI.CardRefreshLink</small><i class="m-2 fa fa-refresh"></i></span></h5>
+                                <p>@StaticUI.FavoriteCardsEmptyTitle</p>
+                                <p>@StaticUI.FavoriteCardsEmptyTextBefore @Html.ActionLink(StaticUI.CardToPageLink, "Index", "Property") @StaticUI.FavoriteCardsEmptyTextAfter</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function() {
+            loadInseption();
+        });
+
+        function loadInseption() {
+
+            $('#inseptionsDiv').hide();
+            $('#inseptionLoadingDiv').show();
+
+            var searchUrl = '@Url.Action("GetRequestedInseption", "Inseption")';
+            $.ajax({
+                method: "GET",
+                url: searchUrl,
+                success: function(result) {
+                  var detailDiv = $('#inseptionsDiv');
+                  detailDiv.replaceWith(result);
+
+                  $('#inseptionsDiv').show();
+                  $('#inseptionLoadingDiv').hide();
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function editPerson() {
+            console.log("editPerson()");
+        }
+    </script>
+}

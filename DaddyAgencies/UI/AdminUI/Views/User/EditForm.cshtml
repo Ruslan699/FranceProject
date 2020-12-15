@@ -1,0 +1,81 @@
+﻿@using AdminUI.Controllers
+@model AdminUI.Models.CreateModel
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header header-elements-inline">
+        <div class="header-elements">
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+
+        @using (Html.BeginForm("Update", "User", FormMethod.Post, new { @class = "form" }))
+
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id)
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        @Html.Label(StaticUI.FullnameFormLabel, new { @for = "inputFullname", @class = "control-label" })
+                        @Html.TextBoxFor(m => m.Fullname, new { @id = "inputFullname", @class = "form-control", placeholder = StaticUI.FullnameFormPlaceholder })
+                        @Html.ValidationMessageFor(m => m.Fullname)
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        @Html.Label(StaticUI.EmailFormLabel, new { @for = "inputEmail", @class = "control-label" })
+                        @Html.TextBoxFor(m => m.Email, new { @id = "inputEmail", @class = "form-control", placeholder = StaticUI.EmailFormPlaceholder })
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        @Html.Label(StaticUI.PhoneFormLabel, new { @for = "inputPhoneNumber", @class = "control-label" })
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @id = "inputPhoneNumber", @class = "form-control", placeholder = StaticUI.PhoneFormPlaceholder })
+                        @Html.ValidationMessageFor(m => m.PhoneNumber)
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        @Html.Label(StaticUI.PasswordFormLabel, new { @for = "inputPassword", @class = "control-label" })
+                        @Html.PasswordFor(m => m.Password, new { @id = "inputPassword", @class = "form-control", placeholder = StaticUI.PasswordFormPlaceholder })
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        @Html.Label(StaticUI.ConfirmPasswordFormLabel, new { @for = "inputConfirmPassword", @class = "control-label" })
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @id = "inputConfirmPassword", @class = "form-control", placeholder = StaticUI.ConfirmPasswordFormPlaceholder })
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                    </div>
+                </div>
+                @*<div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Role</label>
+                            @Html.DropDownListFor(x => x.Id, new SelectList(ViewBag.Roles, "Id", "Name"), "--", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Id)
+                        </div>
+                    </div>*@
+
+            </div>
+            <div class="d-flex justify-content-start align-items-center">
+                <a href="@Url.Action(nameof(UserController.Index))" class="btn btn-light">Revenir</a>
+                <button type="submit" class="btn bg-blue ml-3">Confirmer <i class="icon-paperplane ml-2"></i></button>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

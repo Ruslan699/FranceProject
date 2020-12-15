@@ -1,0 +1,26 @@
+using AdminUI.App_Start;
+using DaddyAgencies.EntityFramework.Features.Inseption;
+using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Web.Mvc;
+using System.Web.Optimization;
+using System.Web.Routing;
+
+namespace AdminUI
+{
+    //public class MvcApplication : System.Web.HttpApplication
+    //{
+    //    protected void Application_Start()
+    //    {
+
+    //        DevExtremeBundleConfig.RegisterBundles(BundleTable.Bundles);
+    //        AreaRegistration.RegisterAllAreas();
+    //        FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+    //        RouteConfig.RegisterRoutes(RouteTable.Routes);
+    //        BundleConfig.RegisterBundles(BundleTable.Bundles);
+    //        ServiceConfig.Register();
+    //    }
+    //}
+}

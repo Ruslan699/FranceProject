@@ -1,0 +1,11 @@
+﻿@using WebApp.Helpers
+@model WebApp.Models.DocumentBase
+
+
+@using (Html.BeginCollectionItem("Documents"))
+{
+    <div id="employeeRow">
+        @Html.TextBoxFor(m => m.Name, "", new { @class = "form-control", @id = "name-intup" })
+        @Html.TextBoxFor(m => m.HttpFile, "", new { @class = "btn btn-file visible", type = "file", accept = "image/*", id = $"millingFile" })
+    </div>
+}?

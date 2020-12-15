@@ -1,0 +1,51 @@
+﻿@using AdminUI.Controllers
+@using DaddyAgencies.Common.EntityFramework.Identity
+
+@(Html.DevExtreme().DataGrid<DaddyAgencies.Application.Models.PropertyPreview>()
+            .ID("usersGridContainer")
+            .DataSource(d => d.Mvc().Controller("Data").LoadAction(nameof(DataController.GetPropertiesAsync)).Key("Id"))
+            .RemoteOperations(false)
+            .AllowColumnReordering(true)
+            .RowAlternationEnabled(true)
+            .FilterRow(filterRow => filterRow.Visible(true).ApplyFilter(GridApplyFilterMode.Auto))
+            .ShowBorders(true)
+            .Paging(p => p.PageSize(10))
+            .Pager(p => p.ShowPageSizeSelector(true).AllowedPageSizes(new int[] { 10, 20, 50 }))
+            //.SearchPanel(s => s.Visible(true).HighlightCaseSensitive(true))
+            .Scrolling(scrolling => scrolling.Mode(GridScrollingMode.Standard))
+            //.Export(e => e.Enabled(true).FileName($"UsersGrid-{DateTime.Now.ToString()}"))
+            .ColumnMinWidth(120)
+            //.HeaderFilter(headerFilter => headerFilter.Visible(true))
+            .Columns(columns =>
+            {
+                columns.AddFor(m => m.Uid).Caption("Id");
+                columns.AddFor(m => m.Name).Caption("Prénom")
+                .CellTemplate(@<text>
+                    <a target="_blank" href="http://lesagencesdepapa.fr/Property/GetDetails?uid=<%=data.Uid%>">
+                        <%=data.Name%>
+                    </a>
+                </text>);
+                        columns.AddFor(m => m.PostalCode).Caption("Code Postal");
+                        columns.AddFor(m => m.SalePrice).Caption("SalePrice");
+                        columns.AddFor(m => m.RoomsCount).Caption("Number of rooms");
+                        columns.AddFor(m => m.TotalSquare).Caption("Carré Total");
+                        columns.AddFor(m => m.OwnerName).Caption("Owner’s Name Surname");
+                        columns.AddFor(m => m.Uid).Caption("Opérations")
+        .Width(150)
+        .AllowFiltering(false)
+        .AllowSorting(false)
+        .CellTemplate(@<text>
+
+            <button class="btn btn-sm btn-primary"
+                    onclick="HrefMe('@Url.Action("Edit", "Announcement")', '<%=value%>')">
+                <i class="icon-pencil4"></i>
+            </button>
+            <button class="btn btn-sm btn-danger"
+                    onclick="remove('@Url.Action("Remove", "Announcement")', '<%=value%>',this)">
+                <i class="icon-trash"></i>
+            </button>
+
+        </text>);
+
+                   })
+)

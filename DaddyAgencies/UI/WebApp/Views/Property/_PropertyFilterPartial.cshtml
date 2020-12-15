@@ -1,0 +1,163 @@
+﻿@using WebApp.Controllers
+@model WebApp.Models.PropertyFilter
+
+<div class="card bg-light">
+    <div class="card-body">
+        @using (Html.BeginForm("PropertyList", "Property", FormMethod.Post,
+            new { enctype = "multipart/form-data", id = "propertySearchForm" }))
+        {
+            @Html.AntiForgeryToken();
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group" style="display:none">
+                        @Html.DropDownListFor(x => x.SelectedRegions, Model.Regions, new
+                        {
+                            @id = "regionSelector",
+                            @class = "form-control selectpicker",
+                            @data_selected_text_format = "count",
+                            @data_size = "7",
+                            @data_live_search = "true",
+                            @multiple = "multiple"
+                        })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.SelectedDepartaments, StaticUI.SearchByDepartamentLabel, new { @class = "control-label" })
+                        @Html.DropDownListFor(x => x.SelectedDepartaments, Model.Departaments, "Aucune sélection", new
+                   {
+                       @id = "departamentSelector",
+                            @class = "form-control selectpicker",
+                       @data_size = "7",
+                       @data_live_search = "true",
+                   })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.SelectedPostalCodes, StaticUI.SearchByPostalCodeLabel, new { @class = "control-label" })
+                        @Html.DropDownListFor(x => x.SelectedPostalCodes, Model.PostalCodes, new
+                        {
+                            id = "postalCodeSelector",
+                            multiple = "multiple",
+                            @class = "form-control chosen-select"
+                        })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Keyword, StaticUI.SearchByKeywordLabel, new { @class = "control-label" })
+                        @Html.TextBoxFor(x => x.Keyword, new { @id = "keyword", @placeholder = StaticUI.SearchByKeywordPlaceholder, @class = "form-control" })
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check form-check-inline">
+                                @Html.CheckBoxFor(x => x.IsBuilding, new { id = "IsBuildingCheck", @class = "form-check-input" })
+                                @Html.LabelFor(x => x.IsBuilding, StaticUI.IsBuildingCheckBox, new { @for = "IsBuildingCheck", @class = "control-label form-check-label" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check form-check-inline">
+                                @Html.CheckBoxFor(x => x.IsApartment, new { id = "IsApartmentCheck", @class = "form-check-input" })
+                                @Html.LabelFor(x => x.IsApartment, StaticUI.IsApartmentCheckBox, new { @for = "IsApartmentCheck", @class = "control-label form-check-label" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check form-check-inline">
+                                @Html.CheckBoxFor(x => x.IsArea, new { id = "IsAreaCheck", @class = "form-check-input" })
+                                @Html.LabelFor(x => x.IsArea, StaticUI.IsAreaCheckBox, new { @for = "IsAreaCheck", @class = "control-label form-check-label" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check form-check-inline">
+                                @Html.CheckBoxFor(x => x.IsCottage, new { id = "IsCottageCheck", @class = "form-check-input" })
+                                @Html.LabelFor(x => x.IsCottage, StaticUI.IsCottageCheckBox, new { @for = "IsCottageCheck", @class = "control-label form-check-label" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-check form-check-inline">
+                                @Html.CheckBoxFor(x => x.IsParking, new { id = "IsParkingCheck", @class = "form-check-input" })
+                                @Html.LabelFor(x => x.IsParking, StaticUI.IsParkingCheckBox, new { @for = "IsParkingCheck", @class = "control-label form-check-label" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-check form-check-inline">
+                                @Html.CheckBoxFor(x => x.IsOther, new { id = "IsOtherCheck", @class = "form-check-input" })
+                                @Html.LabelFor(x => x.IsOther, StaticUI.IsOtherCheckBox, new { @for = "IsOtherCheck", @class = "control-label form-check-label" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group collapse" id="collapseExample">
+                        @*<div class="row">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(x => x.Parking, "Parking", new { @class = "control-label" })
+                                    @Html.DropDownListFor(x => x.Parking, new SelectList(new[] { "Oui", "Non" }), "--", new { @class = "form-control custom-select" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(x => x.EnergyClass, "Classe  énergétique", new { @class = "control-label" })
+                                    @Html.DropDownListFor(x => x.EnergyClass, new SelectList(new[] { "A", "B", "C", "D", "E", "F", "G" }), "--", new { @class = "form-control custom-select" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(x => x.Ges, "GES", new { @class = "control-label" })
+                                    @Html.DropDownListFor(x => x.Ges, new SelectList(new[] { "A", "B", "C", "D", "E", "F", "G" }), "--", new { @class = "form-control custom-select" })
+                                </div>
+                            </div>
+                            <br />*@
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(x => x.PriceMin, StaticUI.SearchByPriceMinLabel, new { @class = "control-label" })
+                                @Html.TextBoxFor(x => x.PriceMin, new { @id = "priceMin", min = "0", @placeholder = StaticUI.SearchByPriceMinPlaceholder, @type = "number", @class = "form-control positive-input" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(x => x.PriceMax, StaticUI.SearchByPriceMaxLabel, new { @class = "control-label" })
+                                @Html.TextBoxFor(x => x.PriceMax, new { @id = "priceMax", min = "0", @placeholder = StaticUI.SearchByPriceMaxPlaceholder, @type = "number", @class = "form-control positive-input" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(x => x.SquareMin, StaticUI.SearchBySquareMinLabel, new { @class = "control-label" })
+                                @Html.TextBoxFor(x => x.SquareMin, new { @id = "squareMin", min = "0", @placeholder = StaticUI.SearchBySquareMinPlaceholder, @type = "number", @class = "form-control positive-input" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(x => x.SquareMax, StaticUI.SearchBySquareMaxLabel, new { @class = "control-label" })
+                                @Html.TextBoxFor(x => x.SquareMax, new { @id = "squareMax", min = "0", @placeholder = StaticUI.SearchBySquareMaxPlaceholder, @type = "number", @class = "form-control positive-input" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(x => x.RoomsMin, StaticUI.SearchByRoomMinLabel, new { @class = "control-label" })
+                                @Html.TextBoxFor(x => x.RoomsMin, new { @id = "roomsMin", @placeholder = StaticUI.SearchByRoomMinPlaceholder, @type = "number", @class = "form-control positive-input" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(x => x.RoomsMax, StaticUI.SearchByRoomMaxLabel, new { @class = "control-label" })
+                                @Html.TextBoxFor(x => x.RoomsMax, new { @id = "roomsMax", min = "0", @placeholder = StaticUI.SearchByRoomMaxPlaceholder, @type = "number", @class = "form-control positive-input" })
+                            </div>
+                        </div>
+                        <hr />
+
+
+                    </div>
+                    <hr />
+                    <div style="margin-top: 10px;">
+                        <div class="row">
+                            <div class="col-6">
+                                @Html.ActionLink(StaticUI.FilterClearButton, "Index", "Property", null, new { @class = "btn btn-secondary btn-block" })
+                            </div>
+                            <div class="col-6">
+                                <a class="btn btn-outline-success btn-block" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    @StaticUI.AdvancedSearchButton
+                                </a>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-info mt-3 btn-block">@StaticUI.SearchButton</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

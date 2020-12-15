@@ -1,0 +1,107 @@
+﻿@using AdminUI.Controllers
+@using DaddyAgencies.Common.EntityFramework.Identity
+
+@(Html.DevExtreme().DataGrid<DaddyAgencies.Application.Models.Inseption>()
+            .ID("usersGridContainer")
+            .DataSource(d => d.Mvc().Controller("Data").LoadAction(nameof(DataController.GetInseptionsAsync)).Key("Uid"))
+            .RemoteOperations(false)
+            .AllowColumnReordering(true)
+            .RowAlternationEnabled(true)
+            .FilterRow(filterRow => filterRow.Visible(true).ApplyFilter(GridApplyFilterMode.Auto))
+            .ShowBorders(true)
+            .Paging(p => p.PageSize(10))
+            .Pager(p => p.ShowPageSizeSelector(true).AllowedPageSizes(new int[] { 10, 20, 50 }))
+            //.SearchPanel(s => s.Visible(true).HighlightCaseSensitive(true))
+            .Scrolling(scrolling => scrolling.Mode(GridScrollingMode.Standard))
+            //.Export(e => e.Enabled(true).FileName($"UsersGrid-{DateTime.Now.ToString()}"))
+            .ColumnMinWidth(120)
+            //.HeaderFilter(headerFilter => headerFilter.Visible(true))
+            .Columns(columns =>
+            {
+
+                columns.AddFor(m => m.CustomerFullName)
+            .Caption("Nom complet");
+
+                columns.AddFor(m => m.CustomerEmail)
+            .Caption("Email");
+
+                columns.AddFor(m => m.CustomerPhone)
+            .Caption("Téléphone");
+
+                columns.AddFor(m => m.PropertyName)
+            .Caption("Propriété")
+            .CellTemplate(@<text>
+                <a target="_blank" href="http://lesagencesdepapa.fr/Property/GetDetails?uid=<%=data.PropertyUid%>">
+                    <%=data.PropertyName%>
+                </a>
+            </text>);
+
+                        columns.AddFor(m => m.RequestedDate).Format("dd/MM/yyyy, HH:mm")
+                    .Caption("Date de RV");
+
+                        columns.AddFor(m => m.PostalCodeName)
+                .Caption("Code Postal");
+
+                        columns.AddFor(m => m.InceptionStatusName)
+               .Caption("Status")
+                  //.AllowFiltering(false)
+                  //.AllowSorting(false)
+                  //.AllowHeaderFiltering(true)
+                  .CellTemplate(@<text>
+                    <span class="<%=value%>"><%=value%></span>
+
+
+                </text>);
+
+                              columns.AddFor(m => m.Uid)
+              .Caption("Opérations")
+              .Width(150)
+              .AllowFiltering(false)
+              .AllowSorting(false)
+              .CellTemplate(@<text>
+
+                <button class="btn btn-sm btn-primary"
+                        onclick="ShowInseptionDetailsModal('@Url.Action("Details", "Inseption")', '<%=value%>')">
+                    <i class="icon-eye"></i>
+                </button>
+                <button class="btn btn-sm btn-danger"
+                        onclick="remove('@Url.Action("Remove", "Inseption")', '<%=value%>',this)">
+                    <i class="icon-trash"></i>
+                </button>
+
+            </text>);
+
+                      })
+)
+<style>
+
+    .Confirmé {
+        background-color: green;
+        color: white;
+        padding: 3px 5px;
+    }
+
+    .Nouveau {
+        background-color: yellow;
+        color: black;
+        padding: 3px 5px;
+    }
+
+    .Deactive {
+        background-color: #421803;
+        color: white;
+        padding: 3px 5px;
+    }
+
+    .Deleted {
+        background-color: #a50000;
+        color: white;
+        padding: 3px 5px;
+    }
+
+    .Rejeté {
+        background-color: #fc3008;
+        color: white;
+        padding: 3px 5px;
+    }
+</style>

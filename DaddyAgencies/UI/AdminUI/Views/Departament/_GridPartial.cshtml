@@ -1,0 +1,47 @@
+﻿@using AdminUI.Controllers
+@using DaddyAgencies.Common.EntityFramework.Identity
+
+@(Html.DevExtreme().DataGrid<DaddyAgencies.Application.Models.DepartamentView>()
+            .ID("usersGridContainer")
+            .DataSource(d => d.Mvc().Controller("Data").LoadAction(nameof(DataController.GetDepartamentsAsync)).Key("Id"))
+            .RemoteOperations(false)
+            .AllowColumnReordering(true)
+            .RowAlternationEnabled(true)
+            .FilterRow(filterRow => filterRow.Visible(true).ApplyFilter(GridApplyFilterMode.Auto))
+            .ShowBorders(true)
+            .Paging(p => p.PageSize(10))
+            .Pager(p => p.ShowPageSizeSelector(true).AllowedPageSizes(new int[] { 10, 20, 50 }))
+            //.SearchPanel(s => s.Visible(true).HighlightCaseSensitive(true))
+            .Scrolling(scrolling => scrolling.Mode(GridScrollingMode.Standard))
+            //.Export(e => e.Enabled(true).FileName($"UsersGrid-{DateTime.Now.ToString()}"))
+            .ColumnMinWidth(120)
+            //.HeaderFilter(headerFilter => headerFilter.Visible(true))
+            .Columns(columns =>
+            {
+
+                columns.AddFor(m => m.Name)
+                    .Caption("Prénom");
+
+                columns.AddFor(m => m.RegionName)
+               .Caption("Region Prénom");
+
+                columns.AddFor(m => m.Uid)
+                    .Caption("Opérations")
+                    .Width(150)
+                    .AllowFiltering(false)
+                    .AllowSorting(false)
+                    .CellTemplate(@<text>
+
+                        <button class="btn btn-sm btn-primary"
+                                onclick="HrefMe('@Url.Action("Edit", "Departament")', '<%=value%>')">
+                            <i class="icon-pencil4"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger"
+                                onclick="remove('@Url.Action("Remove", "Departament")', '<%=value%>',this)">
+                            <i class="icon-trash"></i>
+                        </button>
+
+                    </text>);
+
+                    })
+)

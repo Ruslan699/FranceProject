@@ -1,0 +1,66 @@
+﻿@model WebApp.Models.RecruitmentModel
+
+<div class="container mt-3">
+    <div class="card bg-light">
+        <div class="card-body">
+            @using (Html.BeginForm("Contact", "Recruitment", FormMethod.Post, new { enctype = "multipart/form-data", id= "recruitmentForm", @class = "form-horizontal", role = "form" }))
+            {
+                <p>@StaticUI.RecruitementText</p>
+                <hr />
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="row">
+                    <div class="col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            @Html.Label(StaticUI.FullnameFormLabel, new { @for = "inputFullname", @class = "control-label" })
+                            @Html.TextBoxFor(m => m.FullName, new { @id = "inputFullname", @class = "form-control", placeholder = StaticUI.FullnameFormPlaceholder })
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            @Html.Label(StaticUI.PhoneFormLabel, new { @for = "inputFullname", @class = "control-label" })
+                            @Html.TextBoxFor(m => m.PhoneNumber, new { @id = "inputFullname", @class = "form-control", placeholder = StaticUI.PhoneFormPlaceholder })
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            @Html.Label(StaticUI.EmailFormLabel, new { @for = "inputFullname", @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Email, new { @id = "inputFullname", @class = "form-control", placeholder = StaticUI.EmailFormPlaceholder })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group">
+                            @Html.Label(StaticUI.MessageFormLabel, new { @class = "control-label" })
+                            @Html.TextAreaFor(m => m.Message, new { @id = "inputMessage", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group">
+                            @Html.Label(StaticUI.RecruitmentDocument, new { @for = "recruitmentDocument", @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Documents, "", new
+                             {
+                               @multiple = "multiple",
+                               @class = "btn btn-file visible",
+                               type = "file",
+                               accept = "application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword",
+                               id = "recruitmentDocument",
+                               @name = "recruitmentDocument[]"
+                             })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="submit" class="btn btn-success pull-right" value="@StaticUI.RecruitmentSaveButton" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

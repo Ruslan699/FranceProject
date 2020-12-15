@@ -1,0 +1,137 @@
+
+#wrapper {
+    position: relative;
+    min-height: 100%;
+    width: 100%;
+}
+
+.content {
+    position: relative;
+}
+
+.background {
+    position: absolute;
+}
+
+.bg-image {
+    background-image: url('../images/bgmain-min.png');
+    min-height: 100%;
+    width: 100%;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+
+/*.col-*/
+@media (max-width: 576px) {
+    .hiddn-xs {
+        display: none;
+    }
+
+    .pm-xs-0 {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
+/*.col-sm-*/
+@media (min-width: 576px) and (max-width: 768px) {
+    .hiddn-sm {
+        display: none;
+    }
+
+    .pm-sm-0 {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
+/*.col-md-*/
+@media (min-width: 768px) and (max-width: 992px) {
+    .hiddn-md {
+        display: none;
+    }
+
+    .pm-md-0 {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
+/*.col-lg-*/
+@media (min-width: 992px) and (max-width: 1200px) {
+    .hiddn-lg {
+        display: none;
+    }
+
+    .pm-lg-0 {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
+
+/*.col-xl-*/
+@media (min-width: 1200px) {
+    .hiddn-xl {
+        display: none;
+    }
+
+    .pm-xl-0 {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
+
+
+
+/*navbar custom*/
+@media (max-width: 1200px) {
+    /*--navbar-custom--*/
+    .navbar-collapse {
+        height: 350px !important;
+        max-height: 350px !important;
+        padding-top: 0px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        background: var(--main-background) !important;
+        font-size:0.9rem ;
+    }
+
+    .navbar-expand-sm .navbar-toggler {
+        display: flex !important;
+    }
+
+    .navbar-containernt .nav-item:after, .navbar-containernt .nav-item.active:after {
+        bottom: 0px;
+    }
+
+    .navbar-containernt .navbar-nav .dropdown-menu {
+        position: initial !important;
+        width: 100%;
+    }
+
+    .container.navbar-containernt {
+        min-height: auto !important;
+        padding: 5px;
+        flex-wrap: wrap !important;
+    }
+
+    nav.navbar-expand-sm .navbar-collapse {
+        display: flow-root !important;
+        flex-basis: none !important;
+        width: 100% !important;
+        overflow: overlay;
+        max-height: 300px;
+    }
+
+
+    .navbar .collapse:not(.show) {
+        display: none !important;
+    }
+
+    .navbar-expand-sm .navbar-nav {
+        -ms-flex-direction: row !important;
+        flex-direction: column !important;
+        
+    }
+}

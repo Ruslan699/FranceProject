@@ -1,0 +1,18 @@
+﻿@using DaddyAgencies.Common.Util.Resources
+
+<div class="card">
+    <div class="card-header header-elements-inline">
+        @*<div class="header-elements">
+                <a href="@Url.Action("Create", "Inseption")" style="margin-right:3px" type="button" id="btnAdd" class="btn btn-success">
+                    <i class="fa fa-plus"></i> Créer
+                </a>
+            </div>*@
+    </div>
+    <div class="card-body">
+        @Html.Partial("_GridVendorPartial")
+        <div id="loader">
+        </div>
+    </div>
+</div>
+
+@Html.Partial("Partials/_DetailsModalPartial")

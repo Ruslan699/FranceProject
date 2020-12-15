@@ -1,0 +1,93 @@
+﻿@model IEnumerable<WebApp.Models.PropertyModel>
+@using DaddyAgencies.Application.Models.Enums;
+@using System.ComponentModel;
+@using System.Reflection;
+@if (Model.Any())
+{
+    <link rel="stylesheet" media="screen and (min-width: 601px)" href="~/App/pc.css" />
+    <div id="NotEmplty"></div>
+    foreach (var property in Model)
+    {
+        <div onclick="openDetail('@property.Uid')" class="clickable shadow p-4 mb-4 mx-0 bg-white rounded" style="padding: 0px !important;margin-bottom: 50px !important;">
+            <div class="row ">
+                <div class="col-12  hiddn-xl hiddn-md hiddn-lg caption-title-mb">
+                    <h5 class="float-left m-3 font-weight-light">@property.PostalCode</h5>
+                </div>
+                <div class="col-12 col-sm-12 col-md-5 col-lg-5 prop-image-wait" id="@($"{property.Uid}_img")"
+                     style="height:213px">
+                    <div id="@($"{property.Uid}_loader")" class="loader"></div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-7 col-lg-7 hiddn-sm hiddn-xs description-mb">
+                    <div class="row">
+                        <p class="float-left caption hiddn-xs"><strong>@property.Caption</strong></p>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-6 propertyprice">
+                                <div class="row" style="margin-bottom:30px">
+                                    <div class="col-md-12">
+                                        <p>
+                                            <strong>@StaticUI.PropertySalePriceLabel FAI</strong> @($"€ {String.Format("{0:# ### ###.##}", property.SalePrice)}")
+                                        </p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p><strong>@StaticUI.PropertyTotalSquareLabel</strong> @(String.Format(StaticUI.PropertyDetailCardSquareText, String.Format("{0:0.##}", property.TotalSquare)))</p>
+                                    </div>
+                                    <div class="col-md-12 hiddn-xs">
+                                        <p>
+                                            <strong>Nombre de pièces</strong> @($" {property.RoomsCount}")
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-6 propertypostalcode">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p><strong>Code Postal</strong> @property.PostalCode</p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        @*<p><strong>Type de bien</strong> @Enum.GetName(typeof(PropertyType), property.PropertyType)</p>*@
+                                        <p>
+                                            <strong>Type de bien</strong>
+                                            @{
+                                                string GetDescription(Enum value)
+                                                {
+                                                    FieldInfo fi = value.GetType().GetField(value.ToString());
+                                                    DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+                                                    if (attributes.Length > 0)
+                                                        return attributes[0].Description;
+                                                    else
+                                                        return value.ToString();
+                                                }
+                                            }
+
+                                            @GetDescription((PropertyType)property.PropertyType)
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-12  hiddn-xl  hiddn-md hiddn-lg caption-title-mb">
+                    <h5 class="float-left mr-3 mt-3 ml-3 font-weight-light">@property.Caption</h5>
+                </div>
+                <div class="col-12  hiddn-xl  hiddn-md hiddn-lg caption-title-mb">
+                    <p class="float-left mr-3 ml-3 "><strong>@($"€ {String.Format("{0:# ### ###.##}", property.SalePrice)}")</strong></p>
+                </div>
+                <div class="col-12 hiddn-xl  hiddn-md hiddn-lg">
+                    <br />
+                    <button class="btn btn-info m-3" style="width: 150px" onclick="openDetail('@property.Uid')">En savoir +</button>
+                </div>
+            </div>
+            @*<div class="row">
+                    <div class="col-md-12">
+                        <p>@property.Description</p>
+                    </div>
+                </div>*@
+        </div>
+    }
+}
